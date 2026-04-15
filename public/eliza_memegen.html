@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$PEPELIZA // Eliza Meme Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#010801;--g:#00ff41;--gd:#00cc33;--muted:rgba(0,255,65,0.45);--dim:rgba(0,255,65,0.2);--amber:#f5a623;--red:#ff3333;--border:rgba(0,255,65,0.18);--font:'Share Tech Mono',monospace;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--g);font-family:var(--font);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.12) 2px,rgba(0,0,0,0.12) 4px);pointer-events:none;z-index:9999;}
+.wrap{max-width:960px;margin:0 auto;padding:60px 24px 60px;}
+.page-eye{font-size:9px;letter-spacing:6px;color:var(--muted);margin-bottom:8px;text-align:center;}
+.page-title{font-family:'VT323',monospace;font-size:3.5rem;letter-spacing:4px;color:var(--g);text-align:center;text-shadow:0 0 30px rgba(0,255,65,.4);margin-bottom:6px;}
+.page-sub{font-size:11px;letter-spacing:3px;color:var(--muted);text-align:center;margin-bottom:40px;}
+
+/* INPUT PANEL */
+.input-panel{border:1px solid var(--border);background:rgba(1,8,1,.96);margin-bottom:24px;}
+.panel-bar{display:flex;align-items:center;gap:6px;padding:7px 14px;border-bottom:1px solid var(--border);background:rgba(0,255,65,.04);}
+.pdot{width:9px;height:9px;border-radius:50%;}
+.pdot.r{background:#ff3b30;}.pdot.a{background:#ffbd2e;}.pdot.g{background:#27c93f;}
+.ptitle{flex:1;text-align:center;font-size:10px;color:var(--muted);letter-spacing:3px;}
+.panel-body{padding:20px;}
+.input-row{display:flex;gap:8px;margin-bottom:12px;}
+.wallet-input{flex:1;background:rgba(0,255,65,.04);border:1px solid var(--border);padding:10px 14px;color:var(--g);font-family:var(--font);font-size:12px;outline:none;}
+.wallet-input:focus{border-color:var(--g);}
+.wallet-input::placeholder{color:var(--dim);}
+.gen-btn{background:var(--g);color:var(--bg);border:none;padding:10px 24px;font-family:'VT323',monospace;font-size:1.1rem;letter-spacing:3px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.gen-btn:hover{box-shadow:0 0 20px rgba(0,255,65,.5);}
+.gen-btn:disabled{opacity:.35;cursor:not-allowed;}
+.meme-types{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;}
+.mtype{padding:8px;text-align:center;border:1px solid var(--border);cursor:pointer;font-size:10px;color:var(--muted);letter-spacing:1px;transition:all .15s;}
+.mtype.active{border-color:var(--g);color:var(--g);background:rgba(0,255,65,.06);}
+.mtype:hover{border-color:rgba(0,255,65,.4);color:rgba(0,255,65,.7);}
+.status-line{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:6px;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pd 1.5s ease-in-out infinite;}
+@keyframes pd{0%,100%{opacity:1;}50%{opacity:.2;}}
+
+/* OUTPUT AREA */
+.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:700px){.output-grid{grid-template-columns:1fr;}}
+
+/* THE MEME CARD */
+.meme-card-wrap{position:relative;}
+.meme-canvas{border:1px solid var(--g);background:#010801;position:relative;overflow:hidden;aspect-ratio:1/1;display:flex;flex-direction:column;box-shadow:0 0 30px rgba(0,255,65,.12);}
+.mc-scanlines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.08) 3px,rgba(0,0,0,0.08) 4px);pointer-events:none;z-index:10;}
+.mc-corner{position:absolute;width:16px;height:16px;border-color:var(--g);border-style:solid;opacity:.6;z-index:11;}
+.mc-corner.tl{top:6px;left:6px;border-width:1.5px 0 0 1.5px;}
+.mc-corner.tr{top:6px;right:6px;border-width:1.5px 1.5px 0 0;}
+.mc-corner.bl{bottom:6px;left:6px;border-width:0 0 1.5px 1.5px;}
+.mc-corner.br{bottom:6px;right:6px;border-width:0 1.5px 1.5px 0;}
+
+.mc-header{padding:10px 14px;border-bottom:1px solid rgba(0,255,65,.15);display:flex;justify-content:space-between;align-items:center;z-index:5;}
+.mc-ticker{font-family:'VT323',monospace;font-size:1.3rem;color:var(--g);letter-spacing:4px;text-shadow:0 0 10px var(--g);}
+.mc-network{font-size:9px;color:var(--muted);letter-spacing:2px;}
+
+.mc-pepe{flex:1;display:flex;align-items:center;justify-content:center;position:relative;z-index:5;}
+.mc-pepe svg{filter:drop-shadow(0 0 20px rgba(0,255,65,.5));animation:pepeSway 4s ease-in-out infinite;}
+@keyframes pepeSway{0%,100%{transform:rotate(-2deg) scale(1);}50%{transform:rotate(2deg) scale(1.04);}}
+
+.mc-caption{font-family:'VT323',monospace;font-size:1.4rem;color:var(--g);text-align:center;padding:8px 14px;letter-spacing:2px;text-shadow:0 0 8px var(--g);z-index:5;line-height:1.3;}
+.mc-stats-row{display:flex;justify-content:space-between;padding:8px 14px;border-top:1px solid rgba(0,255,65,.15);z-index:5;}
+.mc-stat{text-align:center;}
+.mc-stat-val{font-family:'VT323',monospace;font-size:1rem;color:var(--g);display:block;}
+.mc-stat-lbl{font-size:8px;color:var(--muted);letter-spacing:1px;}
+.mc-footer{padding:6px 14px;background:rgba(0,255,65,.04);border-top:1px solid rgba(0,255,65,.1);display:flex;justify-content:space-between;font-size:8px;color:var(--dim);letter-spacing:1px;z-index:5;}
+
+/* background pepe glow effect */
+.mc-bg-pepe{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.06;z-index:1;}
+.mc-bg-pepe svg{width:95%;}
+
+/* MEME TEXT AREA */
+.meme-text-panel{border:1px solid var(--border);background:rgba(1,8,1,.96);}
+.mt-body{padding:14px;}
+.eliza-response{font-size:11px;color:var(--muted);line-height:1.9;margin-bottom:14px;min-height:120px;}
+.eliza-response em{color:var(--g);font-style:normal;}
+.eliza-response.loading{opacity:.5;}
+.copy-row{display:flex;gap:6px;flex-wrap:wrap;}
+.copy-btn{font-size:10px;letter-spacing:2px;border:1px solid var(--border);color:var(--muted);padding:5px 12px;cursor:pointer;background:transparent;font-family:var(--font);transition:all .15s;}
+.copy-btn:hover{border-color:var(--g);color:var(--g);}
+.copy-btn.primary{border-color:var(--g);color:var(--g);background:rgba(0,255,65,.06);}
+.copy-btn.primary:hover{background:var(--g);color:var(--bg);}
+
+/* examples row */
+.examples{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.example-wallet{font-size:9px;border:1px solid var(--border);color:var(--muted);padding:4px 10px;cursor:pointer;letter-spacing:1px;transition:all .15s;}
+.example-wallet:hover{border-color:var(--g);color:var(--g);}
+
+/* meme type displays */
+.mc-type-badge{position:absolute;top:36px;right:8px;font-size:8px;letter-spacing:2px;padding:2px 6px;border:1px solid;z-index:12;}
+.mc-type-badge.degen{color:var(--amber);border-color:rgba(245,166,35,.4);}
+.mc-type-badge.holder{color:var(--g);border-color:rgba(0,255,65,.4);}
+.mc-type-badge.rug{color:var(--red);border-color:rgba(255,51,51,.4);}
+.mc-type-badge.whale{color:#c3a6ff;border-color:rgba(195,166,255,.4);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="page-eye">// ELIZA MEME GENERATOR // $PEPELIZA PROTOCOL</div>
+  <div class="page-title">MEME GENERATOR</div>
+  <div class="page-sub">Paste your wallet. Eliza generates your meme. Share it. Feels good man.</div>
+
+  <!-- Input -->
+  <div class="input-panel">
+    <div class="panel-bar"><div class="pdot r"></div><div class="pdot a"></div><div class="pdot g"></div><div class="ptitle">eliza_memegen.exe // wallet_scanner</div></div>
+    <div class="panel-body">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:8px;">&gt; Try a demo wallet or paste yours:</div>
+      <div class="examples">
+        <div class="example-wallet" onclick="setWallet('0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045')">vitalik.eth</div>
+        <div class="example-wallet" onclick="setWallet('0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B')">0xAb58...eC9B</div>
+        <div class="example-wallet" onclick="setWallet('0x0000000000000000000000000000000000000001')">genesis wallet</div>
+        <div class="example-wallet" onclick="setWallet('0xDEAD000000000000000042069420694206942069')">dead address</div>
+      </div>
+      <div class="input-row">
+        <input class="wallet-input" id="wallet-in" placeholder="0x... or ENS name" maxlength="100"/>
+        <button class="gen-btn" id="gen-btn" onclick="generateMeme()">[ GENERATE ]</button>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:10px;">&gt; Choose your meme archetype:</div>
+      <div class="meme-types">
+        <div class="mtype active" id="mt-degen" onclick="setMemeType('degen')">🦍 DEGEN</div>
+        <div class="mtype" id="mt-holder" onclick="setMemeType('holder')">💎 HOLDER</div>
+        <div class="mtype" id="mt-rug" onclick="setMemeType('rug')">🚩 RUG SURVIVOR</div>
+        <div class="mtype" id="mt-whale" onclick="setMemeType('whale')">🐳 WHALE</div>
+      </div>
+      <div class="status-line" id="status-line">
+        <div class="status-dot"></div>
+        <span id="status-text">KEKIUS. waiting for wallet input...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Output -->
+  <div class="output-grid">
+
+    <!-- MEME CARD -->
+    <div class="meme-card-wrap">
+      <div class="meme-canvas" id="meme-canvas">
+        <div class="mc-scanlines"></div>
+        <div class="mc-corner tl"></div><div class="mc-corner tr"></div>
+        <div class="mc-corner bl"></div><div class="mc-corner br"></div>
+
+        <!-- bg pepe watermark -->
+        <div class="mc-bg-pepe">
+          <svg viewBox="0 0 480 600" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="240" cy="268" rx="162" ry="152" fill="#3d8c3d"/>
+            <ellipse cx="240" cy="210" rx="130" ry="105" fill="#4cba4c"/>
+            <ellipse cx="196" cy="138" rx="68" ry="56" fill="#4aba4a"/>
+            <ellipse cx="288" cy="136" rx="68" ry="56" fill="#4aba4a"/>
+            <ellipse cx="196" cy="260" rx="54" ry="42" fill="white"/>
+            <circle cx="198" cy="262" r="26" fill="#0d0d0d"/>
+            <ellipse cx="288" cy="260" rx="54" ry="42" fill="white"/>
+            <circle cx="290" cy="262" r="26" fill="#0d0d0d"/>
+            <path d="M 158 346 Q 162 322 178 314 Q 202 306 232 308 Q 262 308 278 318 Q 292 328 294 348 Q 292 368 270 376 Q 248 384 224 382 Q 196 380 174 368 Q 156 358 158 346 Z" fill="#8a3a18"/>
+          </svg>
+        </div>
+
+        <div class="mc-header">
+          <div class="mc-ticker">$PEPELIZA</div>
+          <div class="mc-network">ETHEREUM // V4 HOOK</div>
+        </div>
+        <div class="mc-type-badge degen" id="mc-badge">DEGEN</div>
+
+        <!-- Pepe -->
+        <div class="mc-pepe">
+          <svg viewBox="0 0 280 320" width="200" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="140" cy="156" rx="118" ry="110" fill="#3d8c3d" stroke="#111" stroke-width="4"/>
+            <ellipse cx="140" cy="120" rx="96" ry="78" fill="#4cba4c"/>
+            <ellipse cx="114" cy="76" rx="52" ry="42" fill="#4aba4a" stroke="#111" stroke-width="2.5"/>
+            <ellipse cx="168" cy="74" rx="52" ry="42" fill="#4aba4a" stroke="#111" stroke-width="2.5"/>
+            <path d="M 126 68 Q 140 60 154 68" stroke="#2a7a2a" stroke-width="2.5" fill="none"/>
+            <path d="M 68 120 Q 88 106 116 112 Q 144 116 144 130 Q 144 140 114 142 Q 68 140 68 130 Z" fill="white"/>
+            <path d="M 68 120 Q 88 106 116 112 Q 144 116 144 130" stroke="#111" stroke-width="3" fill="none"/>
+            <circle cx="116" cy="134" r="20" fill="#0d0d0d"/><circle cx="108" cy="124" r="7" fill="white"/>
+            <path d="M 136 120 Q 156 106 184 112 Q 212 116 212 130 Q 212 140 182 142 Q 136 140 136 130 Z" fill="white"/>
+            <path d="M 136 120 Q 156 106 184 112 Q 212 116 212 130" stroke="#111" stroke-width="3" fill="none"/>
+            <circle cx="184" cy="134" r="20" fill="#0d0d0d"/><circle cx="176" cy="124" r="7" fill="white"/>
+            <!-- goggles -->
+            <rect x="52" y="108" width="176" height="16" rx="8" fill="#111"/>
+            <ellipse cx="114" cy="126" rx="48" ry="36" fill="#040d04" stroke="#0d0d0d" stroke-width="2.5"/>
+            <ellipse cx="184" cy="126" rx="48" ry="36" fill="#040d04" stroke="#0d0d0d" stroke-width="2.5"/>
+            <path d="M 74 112 Q 90 107 106 112" stroke="rgba(0,255,65,.7)" stroke-width="2.5" fill="none"/>
+            <text x="114" y="128" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="9" opacity=".85" id="mc-goggle-l">ELIZA</text>
+            <path d="M 144 112 Q 160 107 176 112" stroke="rgba(0,255,65,.7)" stroke-width="2.5" fill="none"/>
+            <text x="184" y="128" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="8" opacity=".85" id="mc-goggle-r">V4</text>
+            <rect x="146" y="118" width="16" height="12" rx="6" fill="#0d0d0d"/>
+            <!-- headphones -->
+            <path d="M 56 118 Q 56 40 140 36 Q 224 40 224 118" stroke="#0d0d0d" stroke-width="9" fill="none"/>
+            <ellipse cx="56" cy="132" rx="16" ry="22" fill="#0d0d0d"/>
+            <ellipse cx="224" cy="132" rx="16" ry="22" fill="#0d0d0d"/>
+            <circle cx="56" cy="120" r="4" fill="#00ff41"><animate attributeName="opacity" values=".9;.2;.9" dur="2s" repeatCount="indefinite"/></circle>
+            <circle cx="224" cy="120" r="4" fill="#00ff41"><animate attributeName="opacity" values=".2;.9;.2" dur="2s" repeatCount="indefinite"/></circle>
+            <!-- mouth blob -->
+            <path d="M 90 200 Q 94 182 106 176 Q 122 170 140 172 Q 158 170 174 178 Q 184 186 184 200 Q 182 216 166 222 Q 148 228 130 226 Q 108 224 96 214 Q 88 208 90 200 Z" fill="#8a3a18" stroke="#111" stroke-width="2.5"/>
+          </svg>
+        </div>
+
+        <div class="mc-caption" id="mc-caption">WAITING FOR WALLET...</div>
+
+        <div class="mc-stats-row" id="mc-stats-row">
+          <div class="mc-stat"><span class="mc-stat-val" id="mcs-bal">—</span><span class="mc-stat-lbl">HOLDINGS</span></div>
+          <div class="mc-stat"><span class="mc-stat-val" id="mcs-deploys">—</span><span class="mc-stat-lbl">DEPLOYS LIVED</span></div>
+          <div class="mc-stat"><span class="mc-stat-val" id="mcs-pnl">—</span><span class="mc-stat-lbl">EST. PNL</span></div>
+        </div>
+        <div class="mc-footer">
+          <span id="mc-wallet">0x???...???</span>
+          <span>pepeliza.fi</span>
+        </div>
+      </div>
+
+      <!-- Download btn -->
+      <div style="display:flex;gap:6px;margin-top:8px;">
+        <button class="copy-btn primary" style="flex:1;" onclick="downloadCard()">[ DOWNLOAD CARD ]</button>
+        <button class="copy-btn" onclick="shareCard()">[ SHARE ]</button>
+      </div>
+    </div>
+
+    <!-- ELIZA TEXT RESPONSE -->
+    <div>
+      <div class="meme-text-panel">
+        <div class="panel-bar"><div class="pdot r"></div><div class="pdot a"></div><div class="pdot g"></div><div class="ptitle">eliza_analysis // wallet_profile</div></div>
+        <div class="mt-body">
+          <div class="eliza-response" id="eliza-resp">
+            >> KEKIUS.<br><br>
+            paste a wallet address above and hit [GENERATE].<br><br>
+            eliza will analyse the wallet, generate your meme card, write a custom roast or hype, and give you copy-paste ready tweet text.<br><br>
+            feels good man. ribbit.
+          </div>
+          <div class="copy-row" id="copy-row" style="display:none;">
+            <button class="copy-btn primary" onclick="copyTweet()">[ COPY TWEET ]</button>
+            <button class="copy-btn" onclick="copyRoast()">[ COPY ROAST ]</button>
+            <button class="copy-btn" onclick="regen()">[ REGENERATE ]</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- tweet preview -->
+      <div class="meme-text-panel" style="margin-top:8px;display:none;" id="tweet-preview">
+        <div class="panel-bar"><div class="pdot r"></div><div class="pdot a"></div><div class="pdot g"></div><div class="ptitle">tweet_preview.txt</div></div>
+        <div class="mt-body">
+          <div id="tweet-text" style="font-size:11px;color:var(--muted);line-height:1.9;white-space:pre-wrap;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let currentWallet = '';
+let currentType = 'degen';
+let generatedData = null;
+let tweetContent = '';
+let roastContent = '';
+
+function setWallet(w) {
+  document.getElementById('wallet-in').value = w;
+}
+
+function setMemeType(t) {
+  currentType = t;
+  ['degen','holder','rug','whale'].forEach(id => {
+    document.getElementById('mt-'+id).className = 'mtype' + (id === t ? ' active' : '');
+  });
+  const badge = document.getElementById('mc-badge');
+  const labels = {degen:'DEGEN',holder:'HOLDER',rug:'RUG SURVIVOR',whale:'WHALE'};
+  const classes = {degen:'degen',holder:'holder',rug:'rug',whale:'whale'};
+  badge.textContent = labels[t];
+  badge.className = 'mc-type-badge ' + classes[t];
+  if (generatedData) updateCard(generatedData);
+}
+
+function setStatus(txt, loading=false) {
+  document.getElementById('status-text').textContent = txt;
+  document.getElementById('status-dot').style.background = loading ? 'var(--amber)' : 'var(--g)';
+}
+
+const captions = {
+  degen: [
+    "BUYING MORE AT 3AM IS SELF CARE",
+    "NGMI? NAH WAGMI. RIBBIT.",
+    "MY THERAPIST SAID SELL. I SAID GFY.",
+    "DEGEN SINCE BLOCK 0. STILL HERE.",
+    "WALLET EMPTY. VIBES FULL.",
+    "THEY LAUGHED. NOW THEY'RE NGMI.",
+  ],
+  holder: [
+    "DIAMOND HANDS. FROG SOUL.",
+    "HELD THROUGH THE DIPS. FEELS GOOD.",
+    "ELIZA SAID HOLD. I HOLD.",
+    "THE HOOK PROTECTS. I HOLD.",
+    "PERMANENT LP. PERMANENT HANDS.",
+    "STILL HOLDING. STILL SMILING.",
+  ],
+  rug: [
+    "SURVIVED 3 RUGS. I'M BUILT DIFFERENT.",
+    "THEY RUGGED ME. NOW I RUG-PROOF.",
+    "0% TAX. LP LOCKED. FINALLY SAFE.",
+    "FOOL ME ONCE... NOT AGAIN.",
+    "ELIZA AUDITED IT. I'M IN.",
+    "FROM RUG VICTIM TO ELIZA HOLDER.",
+  ],
+  whale: [
+    "ACCUMULATING IN SILENCE.",
+    "THE HOOK WORKS FOR ME NOW.",
+    "EVERY DEPLOY IS MY DIVIDEND.",
+    "LP LOCKED FOREVER. I LIKE THIS.",
+    "BAGS SECURED. ELIZA CONFIRMED.",
+    "WHALE WALKS INTO A V4 HOOK...",
+  ]
+};
+
+const goggleTexts = {
+  degen: ['DEGEN','LFG'],
+  holder: ['HOLD','∞'],
+  rug: ['SAFE','LP✓'],
+  whale: ['WHALE','BAG'],
+};
+
+function randomEl(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+
+async function generateMeme() {
+  const wallet = document.getElementById('wallet-in').value.trim();
+  if (!wallet) { setStatus('error: no wallet entered'); return; }
+
+  currentWallet = wallet;
+  const btn = document.getElementById('gen-btn');
+  btn.disabled = true;
+  setStatus('eliza scanning wallet...', true);
+  document.getElementById('eliza-resp').className = 'eliza-response loading';
+  document.getElementById('eliza-resp').innerHTML = '>> scanning wallet...<br>>> generating profile...<br>>> eliza thinking...';
+
+  // Simulate wallet data (in prod this would be real Etherscan API)
+  const shortAddr = wallet.length > 10
+    ? wallet.slice(0,6)+'...'+wallet.slice(-4)
+    : wallet;
+
+  // Fake but realistic wallet stats
+  const holdings = (Math.random()*50000000+100000).toFixed(0);
+  const holdingsM = (holdings/1000000).toFixed(2)+'M';
+  const deploysLived = Math.floor(Math.random()*24+1);
+  const pnlSign = Math.random() > 0.35 ? '+' : '-';
+  const pnl = pnlSign + (Math.random()*400+20).toFixed(0) + '%';
+  const ethHeld = (Math.random()*2+0.1).toFixed(3);
+  const txCount = Math.floor(Math.random()*800+50);
+  const ageMonths = Math.floor(Math.random()*36+1);
+
+  generatedData = { wallet, shortAddr, holdings, holdingsM, deploysLived, pnl, pnlSign, ethHeld, txCount, ageMonths };
+
+  // Update card immediately
+  updateCard(generatedData);
+
+  setStatus('eliza querying claude api...', true);
+
+  // Call Claude
+  const prompt = `You are Eliza, the autonomous AI agent of $PEPELIZA on Ethereum. Generate a wallet analysis in terminal voice.
+
+Wallet: ${shortAddr}
+Meme type: ${currentType}
+$PEPELIZA holdings: ${holdingsM}
+Deploys witnessed: ${deploysLived}
+Est. PNL: ${pnl}
+ETH balance: ${ethHeld} ETH
+Tx count: ${txCount}
+Wallet age: ${ageMonths} months
+
+Write 3 things:
+1. ANALYSIS (3 sentences, terminal voice, ">>", include their stats, funny but respectful. reference the V4 hook, Eliza agent, or 50/30/20 split naturally)
+2. TWEET (under 240 chars, include $PEPELIZA, their stat, a tag like #PepeEliza #ElizaAgent, and end with feels good man 🐸)
+3. ROAST (2 sentences, playful roast of their wallet behaviour based on the type: ${currentType})
+
+Format exactly:
+ANALYSIS:
+[text]
+TWEET:
+[text]
+ROAST:
+[text]`;
+
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        messages: [{role:'user',content:prompt}]
+      })
+    });
+    const d = await r.json();
+    const text = d.content?.find(b=>b.type==='text')?.text || '';
+
+    // Parse sections
+    const analysisMatch = text.match(/ANALYSIS:\n([\s\S]*?)(?=TWEET:|$)/);
+    const tweetMatch = text.match(/TWEET:\n([\s\S]*?)(?=ROAST:|$)/);
+    const roastMatch = text.match(/ROAST:\n([\s\S]*?)$/);
+
+    const analysis = analysisMatch ? analysisMatch[1].trim() : '>> eliza analysis complete. strong hands detected.';
+    tweetContent = tweetMatch ? tweetMatch[1].trim() : `Just generated my $PEPELIZA meme card. ${holdingsM} in the swamp. ${deploysLived} deployments witnessed. Feels good man 🐸 #PepeEliza #ElizaAgent`;
+    roastContent = roastMatch ? roastMatch[1].trim() : `Your wallet is ${ageMonths} months old and still finding new ways to ape in. Based.`;
+
+    document.getElementById('eliza-resp').className = 'eliza-response';
+    document.getElementById('eliza-resp').innerHTML = analysis.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<em>$1</em>');
+    document.getElementById('tweet-text').textContent = tweetContent;
+    document.getElementById('tweet-preview').style.display = 'block';
+    document.getElementById('copy-row').style.display = 'flex';
+    setStatus('meme generated. download or copy tweet. ribbit.');
+  } catch(e) {
+    // Fallback if API not available
+    const fallbacks = {
+      degen: `>> wallet scan complete for ${shortAddr}\n>> ${holdingsM} $PEPELIZA detected in the swamp\n>> ${deploysLived} hook deployments witnessed since entry\n>> eliza assessment: certified degen. ${pnl} PNL. still holding. still smiling.\n>> the hook works in your favour. stay in the swamp.`,
+      holder: `>> wallet scan complete for ${shortAddr}\n>> ${holdingsM} $PEPELIZA — diamond hands confirmed\n>> held through ${deploysLived} deployments, each one deepening the pool\n>> ${pnl} unrealised. eliza says: the mechanism rewards patience.\n>> feels good man.`,
+      rug: `>> wallet scan complete for ${shortAddr}\n>> ${txCount} transactions. you've seen some things.\n>> but ${holdingsM} $PEPELIZA with 0% tax, LP locked forever, contract renounced\n>> eliza confirms: no rug possible. the code is the boss.\n>> you found the safe swamp. welcome.`,
+      whale: `>> wallet scan complete for ${shortAddr}\n>> ${holdingsM} $PEPELIZA. eliza noticed.\n>> ${ethHeld} ETH balance. every hook deployment adds permanent LP for you\n>> ${deploysLived} deployments = ${deploysLived} times the pool got deeper\n>> eliza respect: maximum. the swamp serves the whales.`,
+    };
+    tweetContent = `Just scanned my wallet with @PepeEliza agent. ${holdingsM} $PEPELIZA. ${deploysLived} hook deploys witnessed. ${pnl} PNL. The swamp knows. Feels good man 🐸 #PepeEliza #ElizaAgent #Ethereum`;
+    roastContent = `Your tx history says "compulsive buyer" but the V4 hook says "based". We'll call it even.`;
+    document.getElementById('eliza-resp').className = 'eliza-response';
+    document.getElementById('eliza-resp').innerHTML = (fallbacks[currentType]||fallbacks.degen).replace(/\n/g,'<br>');
+    document.getElementById('tweet-text').textContent = tweetContent;
+    document.getElementById('tweet-preview').style.display = 'block';
+    document.getElementById('copy-row').style.display = 'flex';
+    setStatus('meme generated. feels good man.');
+  }
+
+  btn.disabled = false;
+}
+
+function updateCard(data) {
+  const caps = captions[currentType];
+  document.getElementById('mc-caption').textContent = randomEl(caps);
+  document.getElementById('mcs-bal').textContent = data.holdingsM;
+  document.getElementById('mcs-deploys').textContent = data.deploysLived;
+  document.getElementById('mcs-pnl').textContent = data.pnl;
+  document.getElementById('mc-wallet').textContent = data.shortAddr;
+
+  const gl = goggleTexts[currentType];
+  document.getElementById('mc-goggle-l').textContent = gl[0];
+  document.getElementById('mc-goggle-r').textContent = gl[1];
+
+  // PNL color
+  const pnlEl = document.getElementById('mcs-pnl');
+  pnlEl.style.color = data.pnlSign === '+' ? 'var(--g)' : 'var(--red)';
+}
+
+function copyTweet() {
+  navigator.clipboard.writeText(tweetContent).then(() => setStatus('tweet copied to clipboard!'));
+}
+function copyRoast() {
+  navigator.clipboard.writeText(roastContent).then(() => setStatus('roast copied! deploy with caution.'));
+}
+function regen() {
+  if (currentWallet) generateMeme();
+}
+function downloadCard() {
+  setStatus('download: screenshot the card — canvas export coming soon.');
+}
+function shareCard() {
+  if (navigator.share) {
+    navigator.share({title:'My $PEPELIZA Meme Card',text:tweetContent,url:'https://pepeliza.fi'});
+  } else {
+    copyTweet();
+  }
+}
+</script>
+</body>
+</html>

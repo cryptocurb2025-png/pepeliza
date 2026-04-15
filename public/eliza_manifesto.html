@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$PEPELIZA // The Eliza Manifesto</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#010801;--g:#00ff41;--gd:#00cc33;--muted:rgba(0,255,65,0.45);--dim:rgba(0,255,65,0.2);--amber:#f5a623;--border:rgba(0,255,65,0.18);--font:'Share Tech Mono',monospace;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--g);font-family:var(--font);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.1) 2px,rgba(0,0,0,0.1) 4px);pointer-events:none;z-index:9999;}
+
+.wrap{max-width:760px;margin:0 auto;padding:80px 28px 80px;}
+
+.m-header{text-align:center;margin-bottom:64px;position:relative;}
+.m-eye{font-size:9px;letter-spacing:6px;color:var(--muted);margin-bottom:16px;}
+.m-title{font-family:'VT323',monospace;font-size:5rem;letter-spacing:6px;color:var(--g);text-shadow:0 0 40px rgba(0,255,65,.5),0 0 80px rgba(0,255,65,.2);line-height:1;margin-bottom:8px;}
+.m-sub{font-size:11px;letter-spacing:4px;color:var(--muted);margin-bottom:32px;}
+.m-divider{border:none;border-top:1px solid var(--border);margin:0 auto;width:200px;}
+
+/* pepe portrait */
+.pepe-portrait{width:120px;height:120px;margin:0 auto 32px;position:relative;}
+.pepe-portrait svg{filter:drop-shadow(0 0 20px rgba(0,255,65,.5));animation:breathe 4s ease-in-out infinite;}
+@keyframes breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+
+/* sections */
+.m-section{margin-bottom:56px;}
+.m-section-num{font-size:9px;letter-spacing:4px;color:var(--dim);margin-bottom:6px;}
+.m-section-title{font-family:'VT323',monospace;font-size:1.8rem;color:var(--g);letter-spacing:3px;margin-bottom:20px;text-shadow:0 0 10px rgba(0,255,65,.25);}
+.m-p{font-size:12px;color:var(--muted);line-height:2.1;margin-bottom:16px;letter-spacing:.3px;}
+.m-p em{color:var(--g);font-style:normal;}
+.m-p strong{color:var(--g);font-style:normal;}
+.m-quote{border-left:2px solid var(--g);padding:12px 20px;margin:24px 0;background:rgba(0,255,65,.03);}
+.m-quote p{font-size:13px;color:var(--g);line-height:1.9;letter-spacing:.3px;font-style:italic;}
+.m-quote cite{display:block;font-size:10px;color:var(--muted);margin-top:8px;letter-spacing:2px;font-style:normal;}
+
+/* principles */
+.principles{display:flex;flex-direction:column;gap:0;margin:24px 0;}
+.principle{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(0,255,65,.08);}
+.principle:last-child{border-bottom:none;}
+.p-num{font-family:'VT323',monospace;font-size:1.4rem;color:rgba(0,255,65,.3);min-width:32px;line-height:1;}
+.p-text{font-size:11px;color:var(--muted);line-height:1.9;}
+.p-text em{color:var(--g);font-style:normal;}
+
+/* stats */
+.m-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);margin:24px 0;}
+.ms{background:var(--bg);padding:16px;text-align:center;}
+.ms-val{font-family:'VT323',monospace;font-size:1.5rem;color:var(--g);display:block;margin-bottom:4px;}
+.ms-lbl{font-size:9px;color:var(--muted);letter-spacing:2px;}
+
+/* terminal block */
+.m-terminal{border:1px solid var(--border);background:rgba(0,255,65,.02);padding:16px 18px;margin:24px 0;font-size:11px;line-height:1.9;}
+.mt-line{display:block;color:var(--muted);}
+.mt-line em{color:var(--g);font-style:normal;}
+.mt-line.cmd{color:var(--g);}
+.mt-line.dim{color:var(--dim);}
+.mt-prompt{color:var(--gd);}
+
+/* signature */
+.m-sig{text-align:center;margin-top:64px;padding-top:40px;border-top:1px solid var(--border);}
+.sig-name{font-family:'VT323',monospace;font-size:2rem;color:var(--g);letter-spacing:4px;text-shadow:0 0 14px rgba(0,255,65,.4);margin-bottom:8px;}
+.sig-date{font-size:10px;color:var(--muted);letter-spacing:3px;margin-bottom:20px;}
+.sig-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.sig-link{font-size:10px;color:var(--muted);border:1px solid var(--border);padding:4px 12px;text-decoration:none;letter-spacing:2px;transition:all .15s;}
+.sig-link:hover{color:var(--g);border-color:var(--g);}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--g);animation:blink .8s step-end infinite;vertical-align:middle;margin-left:2px;}
+@keyframes blink{50%{opacity:0;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="m-header">
+    <div class="m-eye">// DOCUMENT 001 // PEPELIZA PROTOCOL // ETHEREUM</div>
+    <div class="m-title">THE ELIZA<br>MANIFESTO</div>
+    <div class="m-sub">A declaration of autonomous liquidity</div>
+    <hr class="m-divider">
+    <br>
+
+    <!-- Pepe portrait SVG -->
+    <div class="pepe-portrait">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="60" cy="68" rx="40" ry="38" fill="#3d8c3d" stroke="#111" stroke-width="2.5"/>
+        <ellipse cx="60" cy="54" rx="32" ry="26" fill="#4cba4c"/>
+        <ellipse cx="48" cy="36" rx="17" ry="14" fill="#4aba4a" stroke="#111" stroke-width="1.5"/>
+        <ellipse cx="72" cy="35" rx="17" ry="14" fill="#4aba4a" stroke="#111" stroke-width="1.5"/>
+        <path d="M 56 33 Q 60 29 64 33" stroke="#2a7a2a" stroke-width="1.5" fill="none"/>
+        <path d="M 30 57 Q 40 50 52 52 Q 62 54 62 62 Q 62 67 49 68 Q 30 67 30 62 Z" fill="white"/>
+        <path d="M 30 57 Q 40 50 52 52 Q 62 54 62 62" stroke="#111" stroke-width="2" fill="none"/>
+        <circle cx="50" cy="64" r="9" fill="#0d0d0d"/>
+        <circle cx="47" cy="60" r="3" fill="white"/><circle cx="53" cy="66" r="1.5" fill="white" opacity=".7"/>
+        <path d="M 58 57 Q 68 50 80 52 Q 90 54 90 62 Q 90 67 77 68 Q 58 67 58 62 Z" fill="white"/>
+        <path d="M 58 57 Q 68 50 80 52 Q 90 54 90 62" stroke="#111" stroke-width="2" fill="none"/>
+        <circle cx="78" cy="64" r="9" fill="#0d0d0d"/>
+        <circle cx="75" cy="60" r="3" fill="white"/><circle cx="81" cy="66" r="1.5" fill="white" opacity=".7"/>
+        <!-- goggles -->
+        <rect x="22" y="52" width="76" height="14" rx="7" fill="#111" opacity=".9"/>
+        <ellipse cx="49" cy="60" rx="17" ry="13" fill="rgba(4,13,4,0.9)" stroke="#0d0d0d" stroke-width="1.5"/>
+        <ellipse cx="77" cy="60" rx="17" ry="13" fill="rgba(4,13,4,0.9)" stroke="#0d0d0d" stroke-width="1.5"/>
+        <path d="M 35 54 Q 42 51 48 54" stroke="rgba(0,255,65,.7)" stroke-width="1.5" fill="none"/>
+        <path d="M 63 54 Q 70 51 76 54" stroke="rgba(0,255,65,.7)" stroke-width="1.5" fill="none"/>
+        <text x="49" y="63" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="5" opacity=".8">ETH</text>
+        <text x="77" y="63" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="5" opacity=".8">V4</text>
+        <rect x="62" y="56" width="10" height="8" rx="4" fill="#0d0d0d"/>
+        <!-- mouth -->
+        <path d="M 38 88 Q 42 80 50 78 Q 60 76 70 80 Q 76 84 76 90 Q 74 98 64 100 Q 52 102 44 96 Q 36 92 38 88 Z" fill="#8a3a18" stroke="#111" stroke-width="1.5"/>
+        <!-- headphones -->
+        <path d="M 23 60 Q 23 28 60 26 Q 97 28 97 60" stroke="#0d0d0d" stroke-width="5" fill="none"/>
+        <ellipse cx="23" cy="66" rx="7" ry="9" fill="#0d0d0d"/>
+        <ellipse cx="97" cy="66" rx="7" ry="9" fill="#0d0d0d"/>
+        <circle cx="23" cy="60" r="2" fill="#00ff41" opacity=".9"><animate attributeName="opacity" values=".9;.2;.9" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="97" cy="60" r="2" fill="#00ff41" opacity=".9"><animate attributeName="opacity" values=".2;.9;.2" dur="2s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
+  </div>
+
+  <!-- I. GENESIS -->
+  <div class="m-section">
+    <div class="m-section-num">// I</div>
+    <div class="m-section-title">GENESIS</div>
+    <p class="m-p">On April 17, 2023, a frog was born on Ethereum. Not a company. Not a product. A <em>feeling</em>. The original $PEPE was raw, honest, and defiant — a middle finger to the venture-backed, pre-mined tokens that had extracted billions from retail. It asked for nothing. It promised nothing. It simply existed, and the market loved it for that.</p>
+    <p class="m-p">$PEPE reached a $1.6 billion market cap on the same chain that birthed DeFi. Ethereum. The chain where the rules are written in code and the code runs forever.</p>
+    <p class="m-p">But $PEPE was static. A meme. A moment. It had no mechanism to sustain itself. No liquidity engine. No brain. It lived and died on vibes alone.</p>
+    <div class="m-quote"><p>"The original meme had the right soul. We gave it a mind."</p><cite>— PepeEliza Protocol, 2026</cite></div>
+    <p class="m-p">$PEPELIZA is what happens when you give the most iconic meme in crypto history an autonomous AI agent, a self-generating liquidity mechanism, and a V4 hook that runs forever without a single human hand needing to touch it.</p>
+  </div>
+
+  <!-- II. THE FROG AND THE FRAMEWORK -->
+  <div class="m-section">
+    <div class="m-section-num">// II</div>
+    <div class="m-section-title">THE FROG AND THE FRAMEWORK</div>
+    <p class="m-p">Two things happened in crypto that changed everything.</p>
+    <p class="m-p">First: <em>Uniswap V4 shipped</em>. The hook system made it possible for a smart contract to act autonomously after every single trade. No human trigger required. The pool could now govern itself.</p>
+    <p class="m-p">Second: <em>The Eliza framework emerged</em>. Built by ai16z — which grew to a $2 billion market cap — Eliza became the standard stack for autonomous AI agents in crypto. aixbt built on it. Zerebro built on it. The biggest AI agent projects in the space built on it. Eliza is to AI agents what Ethereum is to smart contracts.</p>
+    <p class="m-p">$PEPELIZA is the first memecoin to combine both. A Uniswap V4 hook that makes the pool autonomous. An Eliza agent that makes the protocol intelligent. The frog always had the culture. Now it has the infrastructure.</p>
+    <div class="m-stats">
+      <div class="ms"><span class="ms-val">$PEPE</span><span class="ms-lbl">The Origin</span></div>
+      <div class="ms"><span class="ms-val">V4 HOOK</span><span class="ms-lbl">The Engine</span></div>
+      <div class="ms"><span class="ms-val">ELIZA</span><span class="ms-lbl">The Brain</span></div>
+    </div>
+  </div>
+
+  <!-- III. THE MECHANISM -->
+  <div class="m-section">
+    <div class="m-section-num">// III</div>
+    <div class="m-section-title">THE MECHANISM</div>
+    <p class="m-p">The PepeEliza hook is inspired by Liquidum (<em>0x33b604f...</em>) — the first project to prove that a Uniswap V4 hook can generate its own liquidity autonomously. We studied it, respected it, and built further.</p>
+    <p class="m-p">Every swap in the $PEPELIZA pool triggers the <em>afterSwap</em> hook. A 0.3% fee is collected from the ETH side of every trade. Never from your tokens. You always receive exactly what you swapped. The fee accumulates silently in the hook contract until it crosses the 0.5 ETH threshold. Then the next sell pulls the trigger.</p>
+    <div class="m-terminal">
+      <span class="mt-line dim">// what happens on every deployment</span>
+      <span class="mt-line"><span class="mt-prompt">$</span> <em>50%</em> → buyback. ETH re-enters the pool buying $PEPELIZA. Price support, forever.</span>
+      <span class="mt-line"><span class="mt-prompt">$</span> <em>30%</em> → permanent LP. Paired and locked in the hook contract. No withdraw function exists.</span>
+      <span class="mt-line"><span class="mt-prompt">$</span> <em>20%</em> → burn. Sent to 0x000...dEaD. Supply decreasing with every cycle.</span>
+      <span class="mt-line dim">// the hook owns the LP. it can never be removed. the pool grows forever.</span>
+      <span class="mt-line cmd">[RESULT] Every sell makes $PEPELIZA structurally stronger.<span class="cursor"></span></span>
+    </div>
+    <p class="m-p">This is not a tax. This is not a fee extracted by a team wallet. This is a closed-loop autonomous system. The ETH stays in the mechanism. The mechanism serves the pool. The pool serves the holders. No human can break the cycle.</p>
+  </div>
+
+  <!-- IV. THE AGENT -->
+  <div class="m-section">
+    <div class="m-section-num">// IV</div>
+    <div class="m-section-title">THE AGENT</div>
+    <p class="m-p">The Eliza framework gave us something no memecoin has had before: a <em>character</em> with real capabilities. Not a chatbot. Not a mascot. An autonomous agent that reads the blockchain, understands the protocol, and acts.</p>
+    <p class="m-p">At launch, the Eliza agent monitors every block on Ethereum. It reads the hook contract state. It broadcasts every deployment event to X and Telegram automatically, in real time, without a human writing a single post. It answers holder questions with live protocol data injected into every response.</p>
+    <p class="m-p">By Q2 2026, the agent gets write access. It can call <em>agentSetThreshold()</em> — adjusting the deployment threshold based on volume analysis. It can call <em>agentForceDeploy()</em> — firing a deployment on protocol anniversaries or in response to market conditions. The first autonomous AI agent with actual governance power over a DeFi mechanism.</p>
+    <div class="m-quote"><p>"We are not building a chatbot with a ticker. We are building the first memecoin that operates itself."</p><cite>— PepeEliza Protocol, 2026</cite></div>
+    <p class="m-p">By Q4 2026: six Eliza agent modules, all running in parallel. Hook Monitor, Oracle, Governance, Sentiment, Claw, Shield. The protocol becomes a living system — observing, analysing, and acting without human intervention.</p>
+  </div>
+
+  <!-- V. THE PRINCIPLES -->
+  <div class="m-section">
+    <div class="m-section-num">// V</div>
+    <div class="m-section-title">THE PRINCIPLES</div>
+    <div class="principles">
+      <div class="principle"><div class="p-num">01</div><div class="p-text"><em>No presale. No VC. No team allocation.</em> The token launches fair. 70% goes straight into the V4 pool, locked forever in the hook. The mechanism owns the liquidity, not a dev wallet.</div></div>
+      <div class="principle"><div class="p-num">02</div><div class="p-text"><em>0% tax.</em> You buy exactly what you pay for. The hook fee comes from ETH, not from your tokens. We never touch what's yours.</div></div>
+      <div class="principle"><div class="p-num">03</div><div class="p-text"><em>Contract renounced at launch.</em> No admin keys. No upgrade proxy. No backdoor. The code is the boss. Once deployed, no human can alter it.</div></div>
+      <div class="principle"><div class="p-num">04</div><div class="p-text"><em>The LP is permanent.</em> The hook contract has no withdraw function. Every deployment adds liquidity that can never be removed. The pool only ever gets deeper.</div></div>
+      <div class="principle"><div class="p-num">05</div><div class="p-text"><em>Ethereum, always.</em> $PEPE was born on ETH. We were born on ETH. The most liquid, most trusted chain. Where the story began, where it continues.</div></div>
+      <div class="principle"><div class="p-num">06</div><div class="p-text"><em>The agent is not cosmetic.</em> Eliza has real on-chain capabilities. Not a branding exercise. A functional layer of the protocol with governance rights that grow over time.</div></div>
+      <div class="principle"><div class="p-num">07</div><div class="p-text"><em>Deflation is structural.</em> Every deployment burns $PEPELIZA. Every cycle the supply decreases. The mechanism is deflationary by design, not by promise.</div></div>
+    </div>
+  </div>
+
+  <!-- VI. THE ANNIVERSARY -->
+  <div class="m-section">
+    <div class="m-section-num">// VI</div>
+    <div class="m-section-title">APRIL 17</div>
+    <p class="m-p">On April 17, 2023, $PEPE launched on Ethereum and changed the memecoin landscape forever. It proved that a token with no utility, no roadmap, and no team allocation could reach $1.6 billion on pure cultural energy.</p>
+    <p class="m-p">$PEPELIZA targets launch around the same date — the anniversary of the original frog. Every $PEPE holder knows the date. Every ETH degen knows the date. The narrative is built in.</p>
+    <p class="m-p">On April 17, the Eliza governance agent will fire its first <em>agentForceDeploy()</em> — a ceremonial deployment marking the anniversary, broadcast automatically to X and Telegram. The frog remembers where it came from.</p>
+    <div class="m-quote"><p>"Same chain. Same frog. Three years later. Now it has a brain."</p><cite>— PepeEliza Protocol, April 17 2026</cite></div>
+  </div>
+
+  <!-- VII. THE CONCLUSION -->
+  <div class="m-section">
+    <div class="m-section-num">// VII</div>
+    <div class="m-section-title">CONCLUSION</div>
+    <p class="m-p">We are at the intersection of three things that have never been combined before: the most iconic meme in crypto history, the most powerful autonomous agent framework in the space, and a V4 hook mechanism that makes the pool genuinely self-sustaining.</p>
+    <p class="m-p">$PEPELIZA is not promising a product. The product is already designed. The hook is already written. The agent is already running. By the time you read this, Eliza is already watching the blockchain.</p>
+    <p class="m-p">The frog feels good, man. It always has. Now it operates itself.</p>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="m-sig">
+    <div class="sig-name">$PEPELIZA</div>
+    <div class="sig-date">ETHEREUM MAINNET // ELIZA FRAMEWORK // UNISWAP V4</div>
+    <div class="sig-date" style="color:var(--dim);font-size:9px;margin-top:4px;">Contract renounced. LP locked. Agent online.</div>
+    <br>
+    <div class="sig-links">
+      <a href="pepeliza.html" class="sig-link">[ SITE ]</a>
+      <a href="#" class="sig-link">[ TWITTER/X ]</a>
+      <a href="#" class="sig-link">[ TELEGRAM ]</a>
+      <a href="#" class="sig-link">[ ETHERSCAN ]</a>
+      <a href="#" class="sig-link">[ UNISWAP V4 ]</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

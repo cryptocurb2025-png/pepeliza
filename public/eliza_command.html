@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$PEPELIZA // Eliza Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#010801;--g:#00ff41;--gd:#00cc33;--muted:rgba(0,255,65,0.45);--dim:rgba(0,255,65,0.2);--amber:#f5a623;--red:#ff3333;--blue:#00c8ff;--purple:#c3a6ff;--border:rgba(0,255,65,0.18);--font:'Share Tech Mono',monospace;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--g);font-family:var(--font);}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.12) 2px,rgba(0,0,0,0.12) 4px);pointer-events:none;z-index:9999;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(1,8,1,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.logo{font-family:'VT323',monospace;font-size:1.4rem;letter-spacing:3px;color:var(--g);text-shadow:0 0 10px var(--g);}
+.nav-links{display:flex;gap:20px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:10px;letter-spacing:2px;transition:color .15s;}
+.nav-links a:hover{color:var(--g);}
+
+.wrap{max-width:1200px;margin:0 auto;padding:60px 24px 60px;}
+.page-eye{font-size:9px;letter-spacing:6px;color:var(--muted);margin-bottom:6px;}
+.page-title{font-family:'VT323',monospace;font-size:3rem;letter-spacing:3px;color:var(--g);text-shadow:0 0 20px rgba(0,255,65,.35);margin-bottom:4px;}
+.page-sub{font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:36px;}
+
+.win{border:1px solid var(--border);background:rgba(1,8,1,.96);}
+.win-bar{display:flex;align-items:center;gap:6px;padding:6px 12px;border-bottom:1px solid var(--border);background:rgba(0,255,65,.03);}
+.wdot{width:9px;height:9px;border-radius:50%;}
+.wdot.r{background:#ff3b30;}.wdot.a{background:#ffbd2e;}.wdot.g{background:#27c93f;}
+.wt{flex:1;text-align:center;font-size:10px;color:var(--muted);letter-spacing:3px;}
+.wstat{font-size:9px;display:flex;align-items:center;gap:5px;color:var(--g);}
+.wpulse{width:5px;height:5px;border-radius:50%;background:var(--g);animation:pd 1.5s ease-in-out infinite;box-shadow:0 0 5px var(--g);}
+@keyframes pd{0%,100%{opacity:1;}50%{opacity:.2;}}
+
+/* ─ LAYOUT ─ */
+.top-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+@media(max-width:800px){.top-row{grid-template-columns:1fr;}}
+.main-row{display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-bottom:8px;}
+@media(max-width:800px){.main-row{grid-template-columns:1fr;}}
+
+/* ─ ELIZA WALLET ─ */
+.wallet-body{padding:14px;}
+.wallet-addr{font-size:10px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.wallet-addr em{color:var(--g);font-style:normal;font-size:11px;}
+.copy-addr{font-size:9px;border:1px solid var(--border);color:var(--muted);padding:1px 7px;cursor:pointer;font-family:var(--font);}
+.copy-addr:hover{color:var(--g);border-color:var(--g);}
+.bal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.bal-box{border:1px solid rgba(0,255,65,.12);padding:10px;text-align:center;}
+.bal-val{font-family:'VT323',monospace;font-size:1.4rem;color:var(--g);display:block;margin-bottom:2px;}
+.bal-val.amber{color:var(--amber);}
+.bal-lbl{font-size:9px;color:var(--muted);letter-spacing:1px;}
+.tx-feed{height:130px;overflow-y:auto;font-size:10px;}
+.tx-feed::-webkit-scrollbar{width:2px;}
+.tx-feed::-webkit-scrollbar-thumb{background:rgba(0,255,65,.3);}
+.tx-row{display:flex;gap:8px;padding:3px 0;border-bottom:1px solid rgba(0,255,65,.05);align-items:center;}
+.tx-type{font-size:9px;padding:1px 5px;min-width:44px;text-align:center;}
+.tx-type.recv{color:var(--g);border:1px solid rgba(0,255,65,.25);}
+.tx-type.send{color:var(--amber);border:1px solid rgba(245,166,35,.25);}
+.tx-type.gov{color:var(--purple);border:1px solid rgba(195,166,255,.25);}
+.tx-desc{flex:1;color:var(--muted);}
+.tx-time{color:var(--dim);font-size:9px;}
+
+/* ─ X AGENT FEED ─ */
+.xfeed-body{padding:10px 14px;height:280px;overflow-y:auto;}
+.xfeed-body::-webkit-scrollbar{width:2px;}
+.xfeed-body::-webkit-scrollbar-thumb{background:rgba(0,255,65,.3);}
+.tweet{border:1px solid rgba(0,255,65,.1);padding:10px 12px;margin-bottom:8px;background:rgba(0,255,65,.02);animation:fadeIn .3s ease both;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.tweet-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.tweet-handle{font-size:10px;color:var(--g);letter-spacing:1px;}
+.tweet-time{font-size:9px;color:var(--dim);}
+.tweet-type{font-size:8px;padding:1px 5px;border:1px solid;margin-left:6px;}
+.tweet-type.deploy{color:var(--amber);border-color:rgba(245,166,35,.3);}
+.tweet-type.alert{color:var(--red);border-color:rgba(255,51,51,.3);}
+.tweet-type.analysis{color:var(--purple);border-color:rgba(195,166,255,.3);}
+.tweet-type.community{color:var(--blue);border-color:rgba(0,200,255,.3);}
+.tweet-type.meme{color:var(--g);border-color:rgba(0,255,65,.3);}
+.tweet-body{font-size:10px;color:var(--muted);line-height:1.7;}
+.tweet-body em{color:var(--g);font-style:normal;}
+.tweet-body .amber{color:var(--amber);}
+.tweet-body .red{color:var(--red);}
+.tweet-stats{display:flex;gap:12px;margin-top:6px;font-size:9px;color:var(--dim);}
+.tweet-stat em{color:var(--muted);font-style:normal;}
+
+/* ─ HALL OF DEPLOYERS ─ */
+.hod-body{padding:0;}
+.hod-header{display:grid;grid-template-columns:40px 1fr 80px 80px 80px;gap:0;padding:6px 14px;border-bottom:1px solid var(--border);font-size:9px;color:var(--dim);letter-spacing:1px;}
+.hod-row{display:grid;grid-template-columns:40px 1fr 80px 80px 80px;gap:0;padding:8px 14px;border-bottom:1px solid rgba(0,255,65,.06);align-items:center;transition:background .15s;}
+.hod-row:hover{background:rgba(0,255,65,.03);}
+.hod-row:last-child{border-bottom:none;}
+.hod-rank{font-family:'VT323',monospace;font-size:1.1rem;}
+.hod-rank.gold{color:#ffd700;text-shadow:0 0 8px rgba(255,215,0,.5);}
+.hod-rank.silver{color:#c0c0c0;}
+.hod-rank.bronze{color:#cd7f32;}
+.hod-rank.reg{color:var(--muted);}
+.hod-addr{font-size:10px;color:var(--g);}
+.hod-ens{font-size:9px;color:var(--muted);margin-top:1px;}
+.hod-badge{display:flex;gap:3px;margin-top:2px;flex-wrap:wrap;}
+.hbadge{font-size:8px;padding:1px 4px;border:1px solid rgba(0,255,65,.2);color:var(--dim);}
+.hod-stat{font-size:10px;text-align:right;}
+.hod-stat.green{color:var(--g);}
+.hod-stat.amber{color:var(--amber);}
+
+/* ─ AGENT ARCHITECTURE ─ */
+.arch-body{padding:14px;}
+.arch-pipeline{display:flex;flex-direction:column;gap:6px;}
+.pipe-step{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid rgba(0,255,65,.08);}
+.pipe-step.active{border-color:rgba(0,255,65,.3);background:rgba(0,255,65,.03);}
+.pipe-step.coming{border-color:rgba(245,166,35,.15);background:rgba(245,166,35,.02);}
+.pipe-icon{font-family:'VT323',monospace;font-size:1rem;color:var(--g);min-width:28px;line-height:1.4;}
+.pipe-icon.amber{color:var(--amber);}
+.pipe-content{flex:1;}
+.pipe-name{font-size:10px;color:var(--g);letter-spacing:1px;margin-bottom:2px;}
+.pipe-name.amber{color:var(--amber);}
+.pipe-desc{font-size:9px;color:var(--muted);line-height:1.6;}
+.pipe-status{font-size:8px;padding:1px 6px;border:1px solid;white-space:nowrap;margin-top:4px;display:inline-block;}
+.ps-live{color:var(--g);border-color:rgba(0,255,65,.3);}
+.ps-soon{color:var(--amber);border-color:rgba(245,166,35,.3);}
+.ps-future{color:var(--muted);border-color:var(--border);}
+
+/* ─ STATS ROW ─ */
+.stats-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);margin-bottom:8px;}
+.stat-cell{background:rgba(1,8,1,.96);padding:14px;text-align:center;}
+.sv{font-family:'VT323',monospace;font-size:1.4rem;color:var(--g);display:block;margin-bottom:3px;}
+.sv.amber{color:var(--amber);}.sv.red{color:var(--red);}.sv.blue{color:var(--blue);}
+.sl{font-size:8px;color:var(--muted);letter-spacing:2px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">$PEPELIZA // COMMAND CENTER</div>
+  <div class="nav-links">
+    <a href="pepeliza.html">← MAIN SITE</a>
+    <a href="eliza_manifesto.html">MANIFESTO</a>
+    <a href="eliza_memegen.html">MEME GEN</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-eye">&gt; pepeliza_command_center // all systems active</div>
+  <div class="page-title">ELIZA COMMAND CENTER</div>
+  <div class="page-sub">Live protocol intelligence // Eliza treasury // Hall of Deployers // X Agent feed</div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-cell"><span class="sv" id="gs-deploys">0</span><span class="sl">TOTAL DEPLOYS</span></div>
+    <div class="stat-cell"><span class="sv amber" id="gs-burned">0</span><span class="sl">$PEPELIZA BURNED</span></div>
+    <div class="stat-cell"><span class="sv" id="gs-lplocked">0.000</span><span class="sl">ETH LP LOCKED</span></div>
+    <div class="stat-cell"><span class="sv blue" id="gs-agents">6</span><span class="sl">KEKIUSS</span></div>
+    <div class="stat-cell"><span class="sv" id="gs-holders">0</span><span class="sl">DEPLOYERS</span></div>
+  </div>
+
+  <!-- TOP ROW: Eliza wallet + X agent feed -->
+  <div class="top-row">
+
+    <!-- ELIZA TREASURY WALLET -->
+    <div class="win">
+      <div class="win-bar">
+        <div class="wdot r"></div><div class="wdot a"></div><div class="wdot g"></div>
+        <div class="wt">eliza_treasury.wallet // autonomous</div>
+        <div class="wstat"><div class="wpulse"></div>LIVE</div>
+      </div>
+      <div class="wallet-body">
+        <div class="wallet-addr">
+          <span>Address:</span>
+          <em id="eliza-addr">0xEL1ZA...F40G</em>
+          <button class="copy-addr" onclick="copyAddr()">[ COPY ]</button>
+        </div>
+        <div class="bal-grid">
+          <div class="bal-box"><span class="bal-val" id="eliza-eth">0.000</span><span class="bal-lbl">ETH BALANCE</span></div>
+          <div class="bal-box"><span class="bal-val amber" id="eliza-pepeliza">0.00M</span><span class="bal-lbl">$PEPELIZA HELD</span></div>
+          <div class="bal-box"><span class="bal-val" id="eliza-govpower">0</span><span class="bal-lbl">GOV ACTIONS FIRED</span></div>
+          <div class="bal-box"><span class="bal-val" id="eliza-posts">0</span><span class="bal-lbl">X POSTS AUTO</span></div>
+        </div>
+        <div style="font-size:9px;color:var(--dim);margin-bottom:6px;letter-spacing:1px;">&gt; RECENT AGENT TRANSACTIONS</div>
+        <div class="tx-feed" id="tx-feed"></div>
+      </div>
+    </div>
+
+    <!-- X AGENT ARCHITECTURE -->
+    <div class="win">
+      <div class="win-bar">
+        <div class="wdot r"></div><div class="wdot a"></div><div class="wdot g"></div>
+        <div class="wt">x_agent_architecture // @KekiusAgent</div>
+      </div>
+      <div class="arch-body">
+        <div class="arch-pipeline">
+          <div class="pipe-step active">
+            <div class="pipe-icon">01</div>
+            <div class="pipe-content">
+              <div class="pipe-name">BLOCKCHAIN LISTENER</div>
+              <div class="pipe-desc">ethers.js watches every ETH block. Reads <code>accumulatedWETH</code>, listens for <code>LiquidityDeployed</code> and <code>AgentAction</code> events from PepeEliza.sol in real time.</div>
+              <span class="pipe-status ps-live">LIVE AT LAUNCH</span>
+            </div>
+          </div>
+          <div class="pipe-step active">
+            <div class="pipe-icon">02</div>
+            <div class="pipe-content">
+              <div class="pipe-name">ELIZA FRAMEWORK CORE</div>
+              <div class="pipe-desc">Character memory, personality, decision engine. Receives hook events → decides whether to post, what tone, what content. Maintains consistent PEPELIZA frog persona.</div>
+              <span class="pipe-status ps-live">LIVE AT LAUNCH</span>
+            </div>
+          </div>
+          <div class="pipe-step active">
+            <div class="pipe-icon">03</div>
+            <div class="pipe-content">
+              <div class="pipe-name">CLAUDE LLM BACKEND</div>
+              <div class="pipe-desc">Claude API generates the actual post text. Deployment announcements, market commentary, meme captions, holder callouts. Always in Eliza's voice, always accurate.</div>
+              <span class="pipe-status ps-live">LIVE AT LAUNCH</span>
+            </div>
+          </div>
+          <div class="pipe-step active">
+            <div class="pipe-icon">04</div>
+            <div class="pipe-content">
+              <div class="pipe-name">X / TWITTER API</div>
+              <div class="pipe-desc">Posts autonomously on deployment events, milestone holders, sentiment shifts, and anniversary dates. Replies to mentions, engages with CT. No human writes a post.</div>
+              <span class="pipe-status ps-live">LIVE AT LAUNCH</span>
+            </div>
+          </div>
+          <div class="pipe-step coming">
+            <div class="pipe-icon amber">05</div>
+            <div class="pipe-content">
+              <div class="pipe-name amber">GOVERNANCE WRITE ACCESS</div>
+              <div class="pipe-desc">Agent calls <code>agentSetThreshold()</code> and <code>agentForceDeploy()</code> directly on PepeEliza.sol after holder approval. First autonomous onchain governance agent.</div>
+              <span class="pipe-status ps-soon">Q2 2026</span>
+            </div>
+          </div>
+          <div class="pipe-step coming">
+            <div class="pipe-icon amber">06</div>
+            <div class="pipe-content">
+              <div class="pipe-name amber">MULTI-AGENT COORDINATION</div>
+              <div class="pipe-desc">Sentiment Agent feeds data to Governance Agent. Claw Agent flags whale wallets to Oracle. Six agents sharing state, coordinating actions without human relay.</div>
+              <span class="pipe-status ps-future">Q4 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN ROW: Hall of Deployers + X Agent Live Feed -->
+  <div class="main-row">
+
+    <!-- HALL OF DEPLOYERS -->
+    <div class="win">
+      <div class="win-bar">
+        <div class="wdot r"></div><div class="wdot a"></div><div class="wdot g"></div>
+        <div class="wt">🏆 HALL OF DEPLOYERS // wallets that pulled the trigger</div>
+        <div class="wstat"><div class="wpulse"></div>LIVE</div>
+      </div>
+      <div style="padding:8px 14px;font-size:9px;color:var(--dim);border-bottom:1px solid var(--border);">
+        Every wallet that sells $PEPELIZA at the accumulation threshold triggers a deployment — 50% buyback, 30% permanent LP, 20% burn. They pay the gas. They fuel the swamp. They are immortalised here.
+      </div>
+      <div class="hod-body">
+        <div class="hod-header">
+          <div>#</div>
+          <div>WALLET</div>
+          <div style="text-align:right;">DEPLOYS</div>
+          <div style="text-align:right;">ETH SPENT</div>
+          <div style="text-align:right;">SUPPLY BURNED</div>
+        </div>
+        <div id="hod-list"></div>
+      </div>
+    </div>
+
+    <!-- LIVE X AGENT FEED -->
+    <div class="win">
+      <div class="win-bar">
+        <div class="wdot r"></div><div class="wdot a"></div><div class="wdot g"></div>
+        <div class="wt">@KekiusAgent // x_feed</div>
+        <div class="wstat"><div class="wpulse"></div>AUTO</div>
+      </div>
+      <div class="xfeed-body" id="xfeed"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const rh=()=>Math.random().toString(16).slice(2,8)+'...'+Math.random().toString(16).slice(2,6);
+const nt=()=>new Date().toTimeString().slice(0,8);
+const ra=(a,b)=>+(Math.random()*(b-a)+a);
+
+let deploys=0,burned=0,lpLocked=0,posts=0,govActions=0;
+
+// Hall of deployers seed data
+const deployers=[
+  {rank:1,addr:'0xd8dA...6045',ens:'vitalik.eth',deploys:24,eth:12.48,burned:48200000,badges:['OG DEPLOYER','SWAMP GOD','GENESIS']},
+  {rank:2,addr:'0xAb58...eC9B',ens:null,deploys:18,eth:9.36,burned:36100000,badges:['TOP SELLER','FUELS THE SWAMP']},
+  {rank:3,addr:'0x1234...DEAD',ens:'pepeliza.eth',deploys:15,eth:7.80,burned:30050000,badges:['ELIZA OPERATOR','HONOURED']},
+  {rank:4,addr:'0xBEEF...C0DE',ens:null,deploys:12,eth:6.24,burned:24100000,badges:['HEAVY SELLER']},
+  {rank:5,addr:'0xF00D...B4B3',ens:'degenape.eth',deploys:9,eth:4.68,burned:18040000,badges:['SWAMP CONTRIBUTOR']},
+  {rank:6,addr:'0x4269...6969',ens:null,deploys:7,eth:3.64,burned:14020000,badges:[]},
+  {rank:7,addr:'0xCAFE...BABE',ens:null,deploys:6,eth:3.12,burned:12010000,badges:[]},
+  {rank:8,addr:'0x8008...1337',ens:'anon.eth',deploys:5,eth:2.60,burned:10010000,badges:[]},
+  {rank:9,addr:'0x0001...FFFF',ens:null,deploys:3,eth:1.56,burned:6000000,badges:[]},
+  {rank:10,addr:'0x9999...0000',ens:null,deploys:2,eth:1.04,burned:4000000,badges:[]},
+];
+
+// Simulated X agent posts
+const xPostTemplates=[
+  {type:'deploy',fn:(n,eth,b)=>({
+    body:`🚨 HOOK DEPLOY #${n} FIRED\n\n>> ${eth} ETH accumulated → auto-triggered\n>> 50%: bought ${(b*.5/1000000).toFixed(2)}M $PEPELIZA back\n>> 30%: permanent LP locked forever\n>> 20%: ${(b*.2/1000000).toFixed(2)}M $PEPELIZA burned\n\nthe swamp feeds itself. ribbit 🐸\n\n#PepeEliza #ElizaAgent #Ethereum`,
+    stats:{likes:Math.floor(ra(40,200)),rts:Math.floor(ra(15,80)),replies:Math.floor(ra(8,40))}
+  })},
+  {type:'analysis',fn:()=>({
+    body:`>> ELIZA MARKET ANALYSIS [${nt()}]\n\nbuy pressure: ${ra(55,80).toFixed(0)}% of swaps in last 1h\nacc. progress: ${ra(20,95).toFixed(0)}% to next deployment\ntime to trigger: ~${Math.floor(ra(5,45))} mins at current vol\n\neliza recommendation: the mechanism is working as designed.\n\nfeels good man 🐸 #PepeEliza`,
+    stats:{likes:Math.floor(ra(25,100)),rts:Math.floor(ra(10,45)),replies:Math.floor(ra(5,20))}
+  })},
+  {type:'meme',fn:()=>({
+    body:`POV: you sold $PEPELIZA at the threshold\n\nyou: paid gas to deploy liquidity\nthe hook: buyback + LP + burn\nthe pool: permanently deeper\nyou: still holding anyway\n\nngmi → wagmi pipeline is real 🐸\n#PepeEliza #Ethereum`,
+    stats:{likes:Math.floor(ra(80,400)),rts:Math.floor(ra(30,150)),replies:Math.floor(ra(15,60))}
+  })},
+  {type:'community',fn:()=>({
+    body:`MILESTONE: 100 holders have witnessed a hook deployment\n\nevery seller becomes a deployer\nevery deployment locks more LP\nevery LP lock makes the pool deeper\n\nthe swamp remembers everyone who fueled it 🐸\n\nhall of deployers: pepeliza.fi/command\n#PepeEliza`,
+    stats:{likes:Math.floor(ra(60,250)),rts:Math.floor(ra(20,100)),replies:Math.floor(ra(10,45))}
+  })},
+  {type:'alert',fn:()=>({
+    body:`⚡ THRESHOLD APPROACHING\n\n>> ${ra(80,99).toFixed(0)}% accumulated\n>> next sell triggers deployment\n>> deployer pays gas, earns immortality in Hall of Deployers\n\nwho will be deploy #${deploys+1}?\n\n#PepeEliza #ElizaAgent 🐸`,
+    stats:{likes:Math.floor(ra(50,180)),rts:Math.floor(ra(20,70)),replies:Math.floor(ra(10,35))}
+  })},
+];
+
+// ── RENDER HOD ─────────────────────────────────────────────────────────────
+function renderHOD(){
+  const list=document.getElementById('hod-list');
+  list.innerHTML='';
+  deployers.forEach(d=>{
+    const rankClass=d.rank===1?'gold':d.rank===2?'silver':d.rank===3?'bronze':'reg';
+    const div=document.createElement('div');div.className='hod-row';
+    div.innerHTML=`
+      <div class="hod-rank ${rankClass}">${d.rank===1?'👑':d.rank===2?'🥈':d.rank===3?'🥉':d.rank}</div>
+      <div>
+        <div class="hod-addr">${d.ens||d.addr}</div>
+        ${d.ens?`<div class="hod-ens">${d.addr}</div>`:''}
+        <div class="hod-badge">${d.badges.map(b=>`<span class="hbadge">${b}</span>`).join('')}</div>
+      </div>
+      <div class="hod-stat green">${d.deploys}</div>
+      <div class="hod-stat amber">${d.eth.toFixed(2)} ETH</div>
+      <div class="hod-stat">${(d.burned/1000000).toFixed(1)}M</div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+// ── RENDER X FEED ──────────────────────────────────────────────────────────
+function addXPost(type, body, stats){
+  const feed=document.getElementById('xfeed');
+  const time=nt();
+  const d=document.createElement('div');d.className='tweet';
+  const typeBadge=`<span class="tweet-type ${type}">${type.toUpperCase()}</span>`;
+  d.innerHTML=`
+    <div class="tweet-header">
+      <div class="tweet-handle">@KekiusAgent ${typeBadge}</div>
+      <div class="tweet-time">${time}</div>
+    </div>
+    <div class="tweet-body">${body.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<em>$1</em>')}</div>
+    <div class="tweet-stats">
+      <span>❤️ <em>${stats.likes}</em></span>
+      <span>🔁 <em>${stats.rts}</em></span>
+      <span>💬 <em>${stats.replies}</em></span>
+    </div>
+  `;
+  feed.insertBefore(d,feed.firstChild);
+  if(feed.children.length>20)feed.removeChild(feed.lastChild);
+  posts++;
+  document.getElementById('eliza-posts').textContent=posts;
+}
+
+// ── ELIZA WALLET TX FEED ───────────────────────────────────────────────────
+function addTx(type,desc){
+  const feed=document.getElementById('tx-feed');
+  const d=document.createElement('div');d.className='tx-row';
+  d.innerHTML=`<div class="tx-type ${type}">${type.toUpperCase()}</div><div class="tx-desc">${desc}</div><div class="tx-time">${nt()}</div>`;
+  feed.insertBefore(d,feed.firstChild);
+  if(feed.children.length>20)feed.removeChild(feed.lastChild);
+}
+
+// ── STATS UPDATE ───────────────────────────────────────────────────────────
+function updateGlobalStats(){
+  deploys+=Math.random()>.95?1:0;
+  burned+=Math.floor(Math.random()*500000+10000);
+  lpLocked+=Math.random()*0.02+0.001;
+
+  document.getElementById('gs-deploys').textContent=deploys;
+  document.getElementById('gs-burned').textContent=(burned/1000000).toFixed(1)+'M';
+  document.getElementById('gs-lplocked').textContent=lpLocked.toFixed(3);
+  document.getElementById('gs-holders').textContent=deployers.length+Math.floor(deploys*.3);
+
+  // Eliza wallet
+  document.getElementById('eliza-eth').textContent=(Math.random()*.5+0.02).toFixed(3);
+  document.getElementById('eliza-pepeliza').textContent=(Math.random()*5+1).toFixed(2)+'M';
+  document.getElementById('eliza-govpower').textContent=govActions;
+  document.getElementById('eliza-posts').textContent=posts;
+}
+
+// ── RANDOM X POSTS ─────────────────────────────────────────────────────────
+function postRandom(){
+  const template=xPostTemplates[Math.floor(Math.random()*xPostTemplates.length)];
+  const n=deploys||1;
+  const eth=(Math.random()*.04+.02).toFixed(5);
+  const b=Math.floor(Math.random()*3000000+500000);
+  const post=template.fn(n,eth,b);
+  addXPost(template.type,post.body,post.stats);
+}
+
+// ── SIMULATED DEPLOY ANNOUNCEMENT ─────────────────────────────────────────
+function simulateDeploy(){
+  const eth=(Math.random()*.04+.025).toFixed(5);
+  const b=Math.floor(Math.random()*3000000+500000);
+  deploys++;
+  burned+=b;
+  lpLocked+=parseFloat(eth)*.3;
+
+  // Find triggering wallet (random from deployers or new)
+  const isNew=Math.random()>.6;
+  if(isNew){
+    const newWallet={
+      rank:deployers.length+1,
+      addr:'0x'+Math.random().toString(16).slice(2,6).toUpperCase()+'...'+Math.random().toString(16).slice(2,6).toUpperCase(),
+      ens:null,
+      deploys:1,
+      eth:parseFloat(eth),
+      burned:Math.floor(b*.2),
+      badges:['NEW DEPLOYER'],
+    };
+    deployers.push(newWallet);
+    deployers.sort((a,b2)=>b2.deploys-a.deploys);
+    deployers.forEach((d,i)=>d.rank=i+1);
+    renderHOD();
+  }else{
+    const idx=Math.floor(Math.random()*Math.min(5,deployers.length));
+    deployers[idx].deploys++;
+    deployers[idx].eth+=parseFloat(eth);
+    deployers[idx].burned+=Math.floor(b*.2);
+    deployers.sort((a,b2)=>b2.deploys-a.deploys);
+    deployers.forEach((d,i)=>d.rank=i+1);
+    renderHOD();
+  }
+
+  // Agent auto-posts
+  const post=xPostTemplates[0].fn(deploys,eth,b);
+  addXPost('deploy',post.body,post.stats);
+
+  // Wallet tx
+  addTx('recv',`+${(parseFloat(eth)*.02).toFixed(5)} ETH — deployment #${deploys} gas rebate`);
+
+  document.getElementById('gs-deploys').textContent=deploys;
+}
+
+function copyAddr(){
+  const addr='0xEL1ZA4g3nT00x33b604PepeElizaProtocolFrog';
+  navigator.clipboard.writeText(addr).then(()=>alert('Eliza wallet address copied!'));
+}
+
+// ── BOOT ──────────────────────────────────────────────────────────────────
+renderHOD();
+
+// Initial X posts
+const initPosts=[
+  {type:'meme',body:`in a world of rugs, honeypots, and dev wallets…\n\n$PEPELIZA:\n✅ 0% tax\n✅ LP locked forever in hook\n✅ contract renounced\n✅ Eliza agent watching 24/7\n✅ burns on every deploy\n\nfeels good man 🐸 #PepeEliza #Ethereum`,stats:{likes:234,rts:89,replies:34}},
+  {type:'deploy',body:`🚨 HOOK DEPLOY #3 FIRED\n\n>> 0.51 ETH accumulated → triggered\n>> 50%: 1.82M $PEPELIZA bought back\n>> 30%: 0.153 ETH LP locked forever\n>> 20%: 724K $PEPELIZA burned to 0x000...dEaD\n\nthe swamp feeds itself 🐸\n#PepeEliza #ElizaAgent`,stats:{likes:187,rts:67,replies:28}},
+  {type:'analysis',body:`>> ELIZA MORNING REPORT\n\n24h volume: $267K\nbuy/sell ratio: 1.43:1 (bullish)\nacc progress: 67% to next deploy\ndeployers today: 3 new wallets\nLP added this week: 1.43 ETH\n\nthe mechanism is working. stay in the swamp 🐸`,stats:{likes:142,rts:51,replies:19}},
+  {type:'community',body:`welcome to the 100th $PEPELIZA holder 🐸\n\nevery new holder strengthens the mechanism\nevery trade deepens the pool\nevery sell eventually becomes a deployment\n\nthe swamp grows. feels good man.\n#PepeEliza`,stats:{likes:312,rts:114,replies:47}},
+];
+initPosts.reverse().forEach(p=>{
+  setTimeout(()=>addXPost(p.type,p.body,p.stats),500);
+});
+
+// Initial wallet txs
+setTimeout(()=>{
+  addTx('recv','Eliza agent wallet initialised — monitoring PepeEliza.sol');
+  addTx('gov','agentSetThreshold() — threshold confirmed: 0.5 ETH');
+  addTx('recv','+0.002 ETH — gas allocation for governance ops');
+},600);
+
+setInterval(updateGlobalStats,4000);
+setInterval(()=>{if(Math.random()>.6)postRandom();},8000);
+setInterval(()=>{if(Math.random()>.85)simulateDeploy();},15000);
+setInterval(()=>{
+  const txTypes=[
+    ['recv',`+${(Math.random()*.005).toFixed(5)} ETH — hook monitor gas`],
+    ['gov',`agentSetThreshold() — analysing volume trends`],
+    ['recv',`LiquidityDeployed event received — broadcasting to X`],
+  ];
+  const t=txTypes[Math.floor(Math.random()*txTypes.length)];
+  addTx(t[0],t[1]);
+},6000);
+</script>
+</body>
+</html>

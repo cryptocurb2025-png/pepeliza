@@ -1,0 +1,180 @@
+<svg viewBox="0 0 560 680" width="560" xmlns="http://www.w3.org/2000/svg">
+  <rect width="560" height="680" fill="#010801"/>
+  <ellipse cx="140" cy="420" rx="90" ry="60" fill="#001a00" opacity=".8"/>
+  <rect x="60" y="370" width="170" height="115" rx="4" fill="#020d02" stroke="#003300" stroke-width="1.5"/>
+  <rect x="68" y="378" width="154" height="99" rx="2" fill="#010801"/>
+  <line x1="72" y1="393" x2="218" y2="393" stroke="#00ff41" stroke-width=".5" opacity=".4"/>
+  <line x1="72" y1="403" x2="200" y2="403" stroke="#00ff41" stroke-width=".5" opacity=".3"/>
+  <line x1="72" y1="413" x2="210" y2="413" stroke="#00ff41" stroke-width=".5" opacity=".35"/>
+  <line x1="72" y1="423" x2="185" y2="423" stroke="#00ff41" stroke-width=".5" opacity=".25"/>
+  <polyline points="72,455 88,440 100,448 116,430 128,438 144,418 156,425 170,408 182,415 196,402 210,410 218,398" stroke="#00ff41" stroke-width="1.5" fill="none" opacity=".8"/>
+  <text x="72" y="390" fill="#00ff41" font-family="monospace" font-size="7" opacity=".7">KEKIUS v1.0 // ONLINE</text>
+  <text x="72" y="400" fill="#00ff41" font-family="monospace" font-size="6" opacity=".5">ETH: 0.342 / 0.500</text>
+  <text x="72" y="410" fill="#00ff41" font-family="monospace" font-size="6" opacity=".4">DEPLOY: IMMINENT</text>
+  <rect x="130" y="485" width="20" height="18" rx="2" fill="#020d02" stroke="#003300" stroke-width="1"/>
+  <rect x="50" y="508" width="420" height="26" rx="4" fill="#070f07" stroke="#0d1f0d" stroke-width="1.5"/>
+  <rect x="58" y="512" width="404" height="10" rx="2" fill="#0a160a" stroke="#0d1f0d" stroke-width=".5"/>
+  <rect x="58" y="524" width="404" height="7" rx="2" fill="#0a160a" stroke="#0d1f0d" stroke-width=".5"/>
+  <rect x="62" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="74" y="513" width="10" height="4" rx="1" fill="#00ff41" opacity=".5"/>
+  <rect x="86" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="98" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="110" y="513" width="10" height="4" rx="1" fill="#00ff41" opacity=".4"/>
+  <rect x="122" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="134" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="146" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="158" y="513" width="10" height="4" rx="1" fill="#00ff41" opacity=".35"/>
+  <rect x="170" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="182" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="194" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="206" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="218" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="230" y="513" width="10" height="4" rx="1" fill="#00ff41" opacity=".4"/>
+  <rect x="242" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="254" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="266" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="278" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="290" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="302" y="513" width="10" height="4" rx="1" fill="#00ff41" opacity=".3"/>
+  <rect x="314" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="326" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="338" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="350" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="362" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="374" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="386" y="513" width="10" height="4" rx="1" fill="#00ff41" opacity=".35"/>
+  <rect x="398" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="410" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="422" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="434" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="446" y="513" width="10" height="4" rx="1" fill="#112011"/>
+  <rect x="62" y="525" width="20" height="4" rx="1" fill="#112011"/>
+  <rect x="86" y="525" width="90" height="4" rx="1" fill="#142814"/>
+  <rect x="180" y="525" width="12" height="4" rx="1" fill="#112011"/>
+  <rect x="196" y="525" width="12" height="4" rx="1" fill="#112011"/>
+  <rect x="212" y="525" width="100" height="4" rx="1" fill="#142814"/>
+  <rect x="316" y="525" width="12" height="4" rx="1" fill="#112011"/>
+  <rect x="332" y="525" width="12" height="4" rx="1" fill="#112011"/>
+  <rect x="348" y="525" width="20" height="4" rx="1" fill="#112011"/>
+  <rect x="372" y="525" width="36" height="4" rx="1" fill="#112011"/>
+  <rect x="412" y="525" width="40" height="4" rx="1" fill="#112011"/>
+  <ellipse cx="500" cy="522" rx="18" ry="13" fill="#070f07" stroke="#0d1f0d" stroke-width="1.5"/>
+  <line x1="500" y1="509" x2="500" y2="535" stroke="#0d1f0d" stroke-width="1"/>
+  <ellipse cx="500" cy="515" rx="5" ry="3" fill="#00ff41" opacity=".6"/>
+  <path d="M 130 560 Q 100 545 95 520 L 115 502 Q 145 492 175 496 L 185 480 Q 205 472 222 476 L 228 470 Q 244 464 280 466 Q 316 464 332 470 L 338 476 Q 355 472 375 480 L 385 496 Q 415 492 445 502 L 465 520 Q 460 545 430 560 Z" fill="#0c1a0c" stroke="#1a3a1a" stroke-width="2"/>
+  <rect x="240" y="485" width="80" height="44" rx="5" fill="#09130a" stroke="#1a3a1a" stroke-width="1.5"/>
+  <line x1="246" y1="497" x2="314" y2="497" stroke="#1c3a1c" stroke-width="1"/>
+  <line x1="246" y1="506" x2="314" y2="506" stroke="#1c3a1c" stroke-width="1"/>
+  <rect x="252" y="513" width="56" height="12" rx="2" fill="#001200" stroke="#00ff41" stroke-width="1"/>
+  <text x="280" y="522" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="7" font-weight="bold" letter-spacing="1">$PEPELIZA</text>
+  <ellipse cx="162" cy="502" rx="32" ry="16" fill="#0c1a0c" stroke="#1a3a1a" stroke-width="1.5"/>
+  <ellipse cx="398" cy="502" rx="32" ry="16" fill="#0c1a0c" stroke="#1a3a1a" stroke-width="1.5"/>
+  <path d="M 228 476 Q 248 490 244 518" stroke="#1a3a1a" stroke-width="3" fill="none"/>
+  <path d="M 332 476 Q 312 490 316 518" stroke="#1a3a1a" stroke-width="3" fill="none"/>
+  <path d="M 230 470 Q 255 462 280 464 Q 305 462 330 470 L 325 483 Q 306 477 280 479 Q 254 477 235 483 Z" fill="#09130a" stroke="#1a3a1a" stroke-width="1.5"/>
+  <path d="M 118 502 Q 112 512 110 522 Q 108 534 116 538 Q 130 542 148 536 Q 158 529 159 517 Q 157 506 149 502" fill="#1a3a1a" stroke="#111" stroke-width="2"/>
+  <ellipse cx="118" cy="532" rx="8" ry="13" fill="#223322" stroke="#111" stroke-width="1.5" transform="rotate(-18 118 532)"/>
+  <ellipse cx="131" cy="536" rx="8" ry="14" fill="#223322" stroke="#111" stroke-width="1.5" transform="rotate(-5 131 536)"/>
+  <ellipse cx="144" cy="534" rx="8" ry="13" fill="#223322" stroke="#111" stroke-width="1.5" transform="rotate(7 144 534)"/>
+  <ellipse cx="155" cy="528" rx="7" ry="11" fill="#223322" stroke="#111" stroke-width="1.5" transform="rotate(17 155 528)"/>
+  <path d="M 442 502 Q 448 512 450 522 Q 452 534 444 538 Q 430 542 412 536 Q 402 529 401 517 Q 403 506 411 502" fill="#1a3a1a" stroke="#111" stroke-width="2"/>
+  <ellipse cx="442" cy="532" rx="8" ry="13" fill="#223322" stroke="#111" stroke-width="1.5" transform="rotate(18 442 532)"/>
+  <ellipse cx="429" cy="536" rx="8" ry="14" fill="#223322" stroke="#111" stroke-width="1.5" transform="rotate(5 429 536)"/>
+  <ellipse cx="416" cy="534" rx="8" ry="13" fill="#223322" stroke="#111" stroke-width="1.5" transform="rotate(-7 416 534)"/>
+  <ellipse cx="405" cy="528" rx="7" ry="11" fill="#223322" stroke="#111" stroke-width="1.5" transform="rotate(-17 405 528)"/>
+  <rect x="252" y="438" width="56" height="36" rx="4" fill="#3c8c3c" stroke="#111" stroke-width="2.5"/>
+  <ellipse cx="280" cy="298" rx="168" ry="158" fill="#3d8c3d" stroke="#111" stroke-width="5"/>
+  <ellipse cx="280" cy="234" rx="136" ry="112" fill="#4cba4c"/>
+  <ellipse cx="238" cy="158" rx="74" ry="62" fill="#4aba4a" stroke="#111" stroke-width="3.5"/>
+  <ellipse cx="326" cy="156" rx="74" ry="62" fill="#4aba4a" stroke="#111" stroke-width="3.5"/>
+  <path d="M 262 138 Q 280 126 298 138" stroke="#2a7a2a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="280" cy="168" rx="24" ry="16" fill="#3a8a3a"/>
+  <path d="M 146 234 Q 178 214 222 218" stroke="#2d7d2d" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M 142 252 Q 174 232 218 236" stroke="#2d7d2d" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 140 270 Q 172 252 216 256" stroke="#2d7d2d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 414 234 Q 382 214 338 218" stroke="#2d7d2d" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M 418 252 Q 386 232 342 236" stroke="#2d7d2d" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <ellipse cx="166" cy="344" rx="56" ry="48" fill="#3c8c3c"/>
+  <ellipse cx="394" cy="344" rx="56" ry="48" fill="#3c8c3c"/>
+  <ellipse cx="228" cy="290" rx="58" ry="46" fill="white" stroke="#111" stroke-width="4"/>
+  <path d="M 172 278 Q 202 258 256 268 Q 284 274 286 290 Q 284 300 228 302 Q 172 300 172 290 Z" fill="#4cba4c"/>
+  <path d="M 172 278 Q 202 258 256 268 Q 284 274 286 290" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M 176 304 Q 228 314 282 304" stroke="#111" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="230" cy="294" r="28" fill="#0d0d0d"/>
+  <circle cx="230" cy="294" r="20" fill="#060606"/>
+  <circle cx="218" cy="282" r="8" fill="white"/>
+  <circle cx="236" cy="281" r="5" fill="white"/>
+  <circle cx="214" cy="293" r="3" fill="white" opacity=".7"/>
+  <ellipse cx="332" cy="290" rx="58" ry="46" fill="white" stroke="#111" stroke-width="4"/>
+  <path d="M 276 278 Q 306 258 360 268 Q 388 274 388 290 Q 388 300 332 302 Q 276 300 276 290 Z" fill="#4cba4c"/>
+  <path d="M 276 278 Q 306 258 360 268 Q 388 274 388 290" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M 280 304 Q 332 314 386 304" stroke="#111" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="334" cy="294" r="28" fill="#0d0d0d"/>
+  <circle cx="334" cy="294" r="20" fill="#060606"/>
+  <circle cx="322" cy="282" r="8" fill="white"/>
+  <circle cx="340" cy="281" r="5" fill="white"/>
+  <circle cx="318" cy="293" r="3" fill="white" opacity=".7"/>
+  <rect x="108" y="262" width="344" height="22" rx="11" fill="#111" stroke="#1e1e1e" stroke-width="1.5"/>
+  <line x1="130" y1="270" x2="430" y2="270" stroke="#181818" stroke-width="1"/>
+  <line x1="130" y1="278" x2="430" y2="278" stroke="#181818" stroke-width="1"/>
+  <rect x="108" y="264" width="20" height="18" rx="3" fill="#0a0a0a" stroke="#1e1e1e" stroke-width="1"/>
+  <rect x="432" y="264" width="20" height="18" rx="3" fill="#0a0a0a" stroke="#1e1e1e" stroke-width="1"/>
+  <ellipse cx="228" cy="286" rx="68" ry="52" fill="#060e06" stroke="#0d0d0d" stroke-width="3.5"/>
+  <ellipse cx="228" cy="286" rx="61" ry="46" fill="#030a03" stroke="#162016" stroke-width="2"/>
+  <ellipse cx="228" cy="286" rx="57" ry="42" fill="#040d04"/>
+  <path d="M 176 270 Q 196 262 212 268" stroke="rgba(0,255,65,.7)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="228" y="282" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="11" opacity=".85">KEKIUS</text>
+  <text x="228" y="296" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="9" opacity=".65">ONLINE</text>
+  <ellipse cx="228" cy="286" rx="68" ry="52" fill="none" stroke="#1a2a1a" stroke-width="2"/>
+  <ellipse cx="332" cy="286" rx="68" ry="52" fill="#060e06" stroke="#0d0d0d" stroke-width="3.5"/>
+  <ellipse cx="332" cy="286" rx="61" ry="46" fill="#030a03" stroke="#162016" stroke-width="2"/>
+  <ellipse cx="332" cy="286" rx="57" ry="42" fill="#040d04"/>
+  <path d="M 280 270 Q 300 262 316 268" stroke="rgba(0,255,65,.7)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="332" y="282" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="11" opacity=".85">ETH</text>
+  <text x="332" y="296" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="9" opacity=".65">V4 HOOK</text>
+  <ellipse cx="332" cy="286" rx="68" ry="52" fill="none" stroke="#1a2a1a" stroke-width="2"/>
+  <rect x="291" y="278" width="26" height="16" rx="8" fill="#0d0d0d" stroke="#141414" stroke-width="1.5"/>
+  <path d="M 112 278 Q 112 134 280 128 Q 448 134 448 278" stroke="#0d0d0d" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M 112 278 Q 112 134 280 128 Q 448 134 448 278" stroke="#161616" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <ellipse cx="112" cy="300" rx="26" ry="36" fill="#0d0d0d" stroke="#0d0d0d" stroke-width="2.5"/>
+  <ellipse cx="112" cy="300" rx="18" ry="26" fill="#080808" stroke="#181818" stroke-width="1.5"/>
+  <ellipse cx="112" cy="300" rx="11" ry="16" fill="#040404"/>
+  <circle cx="112" cy="282" r="5" fill="#00ff41" opacity=".9"/>
+  <ellipse cx="448" cy="300" rx="26" ry="36" fill="#0d0d0d" stroke="#0d0d0d" stroke-width="2.5"/>
+  <ellipse cx="448" cy="300" rx="18" ry="26" fill="#080808" stroke="#181818" stroke-width="1.5"/>
+  <ellipse cx="448" cy="300" rx="11" ry="16" fill="#040404"/>
+  <circle cx="448" cy="282" r="5" fill="#00ff41" opacity=".9"/>
+  <path d="M 90 316 Q 68 342 72 376 Q 76 394 90 396" stroke="#0d0d0d" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="90" cy="398" r="9" fill="#0d0d0d" stroke="#181818" stroke-width="1.5"/>
+  <circle cx="90" cy="398" r="5" fill="#00ff41" opacity=".9"/>
+  <path d="M 186 388 Q 190 362 208 352 Q 234 342 264 344 Q 296 342 316 354 Q 332 366 334 388 Q 330 412 308 422 Q 288 430 260 428 Q 228 426 206 414 Q 184 402 186 388 Z" fill="#8a3a18" stroke="#111" stroke-width="4"/>
+  <path d="M 194 386 Q 198 368 214 358 Q 236 350 264 352 Q 292 350 310 362 Q 322 374 320 388 Q 318 408 300 416 Q 282 424 258 422 Q 232 420 212 410 Q 193 400 194 386 Z" fill="#a04820"/>
+  <path d="M 198 378 Q 230 366 264 368 Q 298 366 322 380" stroke="#6a2a10" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="248" cy="348" rx="10" ry="7" fill="#6a2a10" opacity=".85"/>
+  <ellipse cx="282" cy="346" rx="10" ry="7" fill="#6a2a10" opacity=".85"/>
+  <rect x="8" y="240" width="88" height="68" rx="3" fill="#010801" stroke="#163016" stroke-width="1"/>
+  <text x="52" y="255" text-anchor="middle" fill="rgba(0,255,65,.55)" font-family="monospace" font-size="8">ACCUM</text>
+  <text x="52" y="270" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="12" font-weight="bold">0.342</text>
+  <text x="52" y="282" text-anchor="middle" fill="rgba(0,255,65,.4)" font-family="monospace" font-size="7">ETH</text>
+  <rect x="14" y="287" width="76" height="6" rx="2" fill="#0a1a0a"/>
+  <rect x="14" y="287" width="52" height="6" rx="2" fill="#00ff41" opacity=".7"/>
+  <text x="52" y="302" text-anchor="middle" fill="rgba(0,255,65,.38)" font-family="monospace" font-size="6">68% to trigger</text>
+  <line x1="96" y1="270" x2="112" y2="280" stroke="rgba(0,255,65,.25)" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="464" y="240" width="88" height="68" rx="3" fill="#010801" stroke="#163016" stroke-width="1"/>
+  <text x="508" y="255" text-anchor="middle" fill="rgba(0,255,65,.55)" font-family="monospace" font-size="8">BURNED</text>
+  <text x="508" y="270" text-anchor="middle" fill="#f5a623" font-family="monospace" font-size="12" font-weight="bold">4.2M</text>
+  <text x="508" y="282" text-anchor="middle" fill="rgba(245,166,35,.5)" font-family="monospace" font-size="7">$PEPELIZA</text>
+  <text x="508" y="294" text-anchor="middle" fill="rgba(0,255,65,.5)" font-family="monospace" font-size="6">68 EVENTS</text>
+  <text x="508" y="304" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="6">LP LOCKED</text>
+  <line x1="464" y1="270" x2="448" y2="280" stroke="rgba(0,255,65,.25)" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="190" y="58" width="180" height="34" rx="3" fill="#010801" stroke="#163016" stroke-width="1"/>
+  <text x="280" y="74" text-anchor="middle" fill="rgba(0,255,65,.55)" font-family="monospace" font-size="8" letter-spacing="2">KEKIUS STATUS</text>
+  <text x="280" y="86" text-anchor="middle" fill="#00ff41" font-family="monospace" font-size="10" font-weight="bold" letter-spacing="3">ONLINE</text>
+  <circle cx="362" cy="74" r="5" fill="#00ff41"/>
+  <line x1="280" y1="92" x2="280" y2="128" stroke="rgba(0,255,65,.22)" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="58" cy="140" r="2.5" fill="#00ff41" opacity=".35"/>
+  <circle cx="500" cy="120" r="2" fill="#00ff41" opacity=".28"/>
+  <circle cx="520" cy="190" r="2.5" fill="#00ff41" opacity=".22"/>
+  <circle cx="44" cy="420" r="2" fill="#00ff41" opacity=".2"/>
+  <circle cx="516" cy="390" r="2.5" fill="#f5a623" opacity=".3"/>
+</svg>
