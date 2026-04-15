@@ -512,7 +512,7 @@ footer a{color:var(--gd);text-decoration:none;}
             <div class="sr"><span class="sk">24H</span><span class="sv up" id="sc">+0.00%</span></div>
           </div>
           <div class="ps">
-            <div class="pl">// KEKIUS hook stats</div>
+            <div class="pl">// hook stats</div>
             <div class="sr"><span class="sk">$PEPELIZA BURNED</span><span class="sv amber" id="sburn">0</span></div>
             <div class="sr"><span class="sk">LP LOCKED</span><span class="sv" id="slplk">0.000 ETH</span></div>
             <div class="sr"><span class="sk">ETH RECYCLED</span><span class="sv" id="srecyc">0.000 ETH</span></div>
@@ -577,8 +577,8 @@ footer a{color:var(--gd);text-decoration:none;}
 <!-- HOOK MECHANISM -->
 <div class="section-full" id="hook"><div class="section">
   <div class="s-eye">&gt; v4 hook mechanism // for the nerds</div>
-  <div class="s-title">HOW THE KEKIUS HOOK WORKS</div>
-  <div class="s-sub">Built on the same afterSwap fee accumulation pattern as Liquidum — extended with a 3-way split and KEKIUS governance. The pool feeds itself, the agent monitors it.</div>
+  <div class="s-title">HOW THE HOOK WORKS</div>
+  <div class="s-sub">Built on the same afterSwap fee accumulation pattern as Liquidum — extended with a 3-way split and KEKIUS (agent) governance. The pool feeds itself, the agent monitors it.</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
     <div class="hw-block">
       <div class="hw-hdr"><h3>&gt; PEPEELIZA HOOK MECHANISM</h3><p>Uniswap V4 afterSwap Hook // Ethereum Mainnet</p></div>
@@ -607,7 +607,7 @@ footer a{color:var(--gd);text-decoration:none;}
       </div>
       <div class="sol-body">
 <div><span class="cm">// PepeEliza V4 Hook — afterSwap</span></div>
-<div><span class="cm">// Extends Liquidum pattern + KEKIUS layer</span></div>
+<div><span class="cm">// Extends Liquidum pattern + Eliza agent layer</span></div>
 <div><span class="kw">contract</span> <span class="fn">PepeEliza</span> <span class="kw">is</span> <span class="tp">BaseHook</span> {</div>
 <br>
 <div>&nbsp;&nbsp;<span class="cm">// ── Core state (same as Liquidum) ──</span></div>
@@ -618,7 +618,7 @@ footer a{color:var(--gd);text-decoration:none;}
 <div>&nbsp;&nbsp;<span class="tp">uint256</span> <span class="kw">public</span> deploymentCount;</div>
 <div>&nbsp;&nbsp;<span class="tp">address</span> <span class="kw">constant</span> DEAD = <span class="str">0x000...dEaD</span>;</div>
 <br>
-<div>&nbsp;&nbsp;<span class="cm">// ── KEKIUS extensions ──</span></div>
+<div>&nbsp;&nbsp;<span class="cm">// ── Eliza agent extensions ──</span></div>
 <div>&nbsp;&nbsp;<span class="tp">address</span> <span class="kw">public</span> elizaAgent;</div>
 <div>&nbsp;&nbsp;<span class="tp">mapping</span>(<span class="tp">address</span> => <span class="tp">bool</span>) <span class="kw">public</span> elizaOperators;</div>
 <div>&nbsp;&nbsp;<span class="tp">uint256</span> <span class="kw">public</span> agentThresholdOverride;</div>
@@ -694,8 +694,8 @@ footer a{color:var(--gd);text-decoration:none;}
 <!-- KEKIUS ARCHITECTURE -->
 <div class="section-full" id="agent"><div class="section">
   <div class="s-eye">&gt; eliza framework // autonomous agent layer</div>
-  <div class="s-title">THE KEKIUS</div>
-  <div class="s-sub">The KEKIUS powers ai16z ($2B), aixbt (445K followers), Zerebro. $PEPELIZA is the first memecoin to run KEKIUSs as active protocol operators — not just chatbots, but agents that take real onchain actions.</div>
+  <div class="s-title">MEET KEKIUS</div>
+  <div class="s-sub">The Eliza framework powers ai16z ($2B), aixbt (445K followers), Zerebro. $PEPELIZA is the first memecoin to run Eliza agents as active protocol operators — not just chatbots, but agents that take real onchain actions.</div>
 
   <div class="agent-arch">
 
@@ -738,7 +738,7 @@ footer a{color:var(--gd);text-decoration:none;}
     <div class="arch-card">
       <div class="arch-num">AGENT MODULE 04 // ROADMAP</div>
       <div class="arch-name">SENTIMENT AGENT <span class="arch-badge soon">Q3 2026</span></div>
-      <div class="arch-desc">KEKIUS that runs continuous sentiment analysis across CT, Reddit, and Telegram for $PEPELIZA and the broader memecoin market. Publishes an KEKIUS Index onchain every hour. Holders stake $PEPELIZA to access the live API feed.</div>
+      <div class="arch-desc">Eliza agent that runs continuous sentiment analysis across CT, Reddit, and Telegram for $PEPELIZA and the broader memecoin market. Publishes an Eliza Sentiment Index onchain every hour. Holders stake $PEPELIZA to access the live API feed.</div>
       <div class="arch-fns">
         <div class="arch-fn">Scrapes X/Twitter, Reddit, Telegram in real time</div>
         <div class="arch-fn">NLP sentiment scoring across 200+ tokens</div>
@@ -750,7 +750,7 @@ footer a{color:var(--gd);text-decoration:none;}
     <div class="arch-card">
       <div class="arch-num">AGENT MODULE 05 // ROADMAP</div>
       <div class="arch-name">CLAW AGENT <span class="arch-badge future">Q3 2026</span></div>
-      <div class="arch-desc">KEKIUS agent. Submit any wallet address — the agent traces its full onchain history across Ethereum, maps connected wallets via funding chains, calculates historical PnL, and flags involvement in prior rugs. Burns $PEPELIZA per deep scan.</div>
+      <div class="arch-desc">Eliza forensics agent. Submit any wallet address — the agent traces its full onchain history across Ethereum, maps connected wallets via funding chains, calculates historical PnL, and flags involvement in prior rugs. Burns $PEPELIZA per deep scan.</div>
       <div class="arch-fns">
         <div class="arch-fn">Full transaction history analysis via Etherscan API</div>
         <div class="arch-fn">Wallet graph clustering — finds connected dev wallets</div>
@@ -762,7 +762,7 @@ footer a{color:var(--gd);text-decoration:none;}
     <div class="arch-card">
       <div class="arch-num">AGENT MODULE 06 // ROADMAP</div>
       <div class="arch-name">SHIELD AGENT <span class="arch-badge future">Q4 2026</span></div>
-      <div class="arch-desc">KEKIUS auditor. Submit any token contract — the agent checks liquidity lock status, ownership renouncement, hidden mint functions, honeypot traps, wallet concentration, and deployer history. Returns an KEKIUS 0–100.</div>
+      <div class="arch-desc">Eliza contract auditor. Submit any token contract — the agent checks liquidity lock status, ownership renouncement, hidden mint functions, honeypot traps, wallet concentration, and deployer history. Returns an Eliza Score 0–100.</div>
       <div class="arch-fns">
         <div class="arch-fn">Reads contract bytecode and ABI for hidden functions</div>
         <div class="arch-fn">Checks LP lock, ownership, blacklist powers</div>
@@ -798,12 +798,12 @@ footer a{color:var(--gd);text-decoration:none;}
   <div class="s-title">ELIZA TOOLS</div>
   <div class="s-sub">Hold $PEPELIZA. Unlock the Eliza tool suite — all powered by KEKIUS with Claude as the LLM backend.</div>
   <div class="tools-grid">
-    <div class="tc"><div class="tc-name">KEKIUSBOT <span class="tc-badge">LAUNCH</span></div><div class="tc-desc">Wallet-gated KEKIUS. Verify $PEPELIZA balance, unlock daily credits. Portfolio analysis, contract scanning, alpha research. Your personal Eliza running 24/7.</div><div class="tc-tags"><span class="ttag">wallet-gated</span><span class="ttag">KEKIUS</span><span class="ttag">Claude AI</span><span class="ttag">Telegram</span></div></div>
-    <div class="tc"><div class="tc-name">ELIZA CLAW <span class="tc-badge amber">Q3 2026</span></div><div class="tc-desc">KEKIUS agent. Traces full wallet history, maps funding chains, calculates PnL, flags rug history. Scratch the surface of any address. Burns $PEPELIZA per scan.</div><div class="tc-tags"><span class="ttag">KEKIUS</span><span class="ttag">wallet forensics</span><span class="ttag">rug history</span><span class="ttag">burn/scan</span></div></div>
-    <div class="tc"><div class="tc-name">ELIZA SHIELD <span class="tc-badge amber">Q4 2026</span></div><div class="tc-desc">KEKIUS auditor. Reads bytecode, checks LP lock, ownership, honeypot risk, concentration. Returns KEKIUS 0–100. Free basic scan, deep scan burns $PEPELIZA.</div><div class="tc-tags"><span class="ttag">KEKIUS</span><span class="ttag">contract audit</span><span class="ttag">eliza score</span><span class="ttag">pay-per-scan</span></div></div>
-    <div class="tc"><div class="tc-name">ELIZA SIGNALS <span class="tc-badge amber">Q3 2026</span></div><div class="tc-desc">Real-time Eliza sentiment oracle. Scrapes X, Reddit, Telegram. Publishes KEKIUS Index onchain hourly. Stake $PEPELIZA for live API access.</div><div class="tc-tags"><span class="ttag">KEKIUS</span><span class="ttag">sentiment oracle</span><span class="ttag">onchain feed</span><span class="ttag">B2B API</span></div></div>
-    <div class="tc"><div class="tc-name">ELIZA LEAGUE <span class="tc-badge amber">Q3 2026</span></div><div class="tc-desc">Weekly memecoin fantasy. Draft 5 tokens, real performance 7 days. Entry fee in $PEPELIZA. KEKIUS narrator narrates the drama. Prize pool to top 3.</div><div class="tc-tags"><span class="ttag">weekly game</span><span class="ttag">entry burn</span><span class="ttag">prize pool</span><span class="ttag">Eliza narrator</span></div></div>
-    <div class="tc"><div class="tc-name">ELIZA TV <span class="tc-badge amber">Q4 2026</span></div><div class="tc-desc">24/7 AI livestream anchored by an KEKIUS. Reads crypto news, whale alerts, CT drama live. Projects pay $PEPELIZA for airtime. Self-funding marketing engine.</div><div class="tc-tags"><span class="ttag">24/7 stream</span><span class="ttag">Eliza anchor</span><span class="ttag">$PEPELIZA airtime</span><span class="ttag">autonomous</span></div></div>
+    <div class="tc"><div class="tc-name">KEKIUSBOT <span class="tc-badge">LAUNCH</span></div><div class="tc-desc">Wallet-gated KEKIUS. Verify $PEPELIZA balance, unlock daily credits. Portfolio analysis, contract scanning, alpha research. Your personal Eliza running 24/7.</div><div class="tc-tags"><span class="ttag">wallet-gated</span><span class="ttag">eliza framework</span><span class="ttag">Claude AI</span><span class="ttag">Telegram</span></div></div>
+    <div class="tc"><div class="tc-name">ELIZA CLAW <span class="tc-badge amber">Q3 2026</span></div><div class="tc-desc">Eliza forensics agent. Traces full wallet history, maps funding chains, calculates PnL, flags rug history. Scratch the surface of any address. Burns $PEPELIZA per scan.</div><div class="tc-tags"><span class="ttag">eliza framework</span><span class="ttag">wallet forensics</span><span class="ttag">rug history</span><span class="ttag">burn/scan</span></div></div>
+    <div class="tc"><div class="tc-name">ELIZA SHIELD <span class="tc-badge amber">Q4 2026</span></div><div class="tc-desc">Eliza contract auditor. Reads bytecode, checks LP lock, ownership, honeypot risk, concentration. Returns Eliza Score 0–100. Free basic scan, deep scan burns $PEPELIZA.</div><div class="tc-tags"><span class="ttag">eliza framework</span><span class="ttag">contract audit</span><span class="ttag">eliza score</span><span class="ttag">pay-per-scan</span></div></div>
+    <div class="tc"><div class="tc-name">ELIZA SIGNALS <span class="tc-badge amber">Q3 2026</span></div><div class="tc-desc">Real-time Eliza sentiment oracle. Scrapes X, Reddit, Telegram. Publishes Eliza Sentiment Index onchain hourly. Stake $PEPELIZA for live API access.</div><div class="tc-tags"><span class="ttag">eliza framework</span><span class="ttag">sentiment oracle</span><span class="ttag">onchain feed</span><span class="ttag">B2B API</span></div></div>
+    <div class="tc"><div class="tc-name">ELIZA LEAGUE <span class="tc-badge amber">Q3 2026</span></div><div class="tc-desc">Weekly memecoin fantasy. Draft 5 tokens, real performance 7 days. Entry fee in $PEPELIZA. KEKIUS narrates the drama. Prize pool to top 3.</div><div class="tc-tags"><span class="ttag">weekly game</span><span class="ttag">entry burn</span><span class="ttag">prize pool</span><span class="ttag">Eliza narrator</span></div></div>
+    <div class="tc"><div class="tc-name">ELIZA TV <span class="tc-badge amber">Q4 2026</span></div><div class="tc-desc">24/7 AI livestream anchored by an Eliza agent. Reads crypto news, whale alerts, CT drama live. Projects pay $PEPELIZA for airtime. Self-funding marketing engine.</div><div class="tc-tags"><span class="ttag">24/7 stream</span><span class="ttag">Eliza anchor</span><span class="ttag">$PEPELIZA airtime</span><span class="ttag">autonomous</span></div></div>
     <div class="tc"><div class="tc-name">KEKIUS ALERTS <span class="tc-badge">LIVE</span></div><div class="tc-desc">Real-time whale alerts and deployment notifications. KEKIUS pings you on Telegram the moment a hook deployment fires or a whale wallet moves.</div><div class="tc-tags"><span class="ttag">telegram</span><span class="ttag">whale alerts</span><span class="ttag">free</span><span class="ttag">instant</span></div></div>
   </div>
 </div></div>
@@ -867,7 +867,7 @@ footer a{color:var(--gd);text-decoration:none;}
   <div class="tknx-grid">
     <div class="win" style="padding:14px;">
       <div class="tbar-row"><div class="tbar-head"><span>Uniswap V4 LP — locked in hook forever</span><span>70%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:70%;background:var(--g);"></div></div></div>
-      <div class="tbar-row"><div class="tbar-head"><span>Community, KEKIUSs & ecosystem</span><span>15%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:15%;background:var(--gd);"></div></div></div>
+      <div class="tbar-row"><div class="tbar-head"><span>Community, Eliza agents & ecosystem</span><span>15%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:15%;background:var(--gd);"></div></div></div>
       <div class="tbar-row"><div class="tbar-head"><span>CEX listings & bridge reserves</span><span>10%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:10%;background:var(--amber);"></div></div></div>
       <div class="tbar-row"><div class="tbar-head"><span>Development & audit (12m lock)</span><span>5%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:5%;background:var(--red);"></div></div></div>
       <div class="tbar-row"><div class="tbar-head"><span>Team / presale / VC</span><span>0%</span></div><div class="tbar-track"><div class="tbar-fill" style="width:0.2%;background:var(--dim);"></div></div></div>
@@ -897,8 +897,8 @@ footer a{color:var(--gd);text-decoration:none;}
     <div class="rm-item"><div class="rm-dot done"></div><div class="rm-phase">PHASE 0 — COMPLETE</div><div class="rm-title">CONCEPT & FRAMEWORK</div><div class="rm-body">PepeEliza mechanism designed. 50/30/20 split. KEKIUS selected. Ethereum mainnet. $PEPELIZA ticker confirmed. Website live.</div></div>
     <div class="rm-item"><div class="rm-dot now"></div><div class="rm-phase now">PHASE 1 — NOW</div><div class="rm-title">CONTRACT + AGENT DEVELOPMENT</div><div class="rm-body">PepeEliza V4 hook written in Solidity. KEKIUS Hook Monitor built. KEKIUSBOT live on Telegram. Ethereum Sepolia testnet deployment. Audit scoped.</div></div>
     <div class="rm-item"><div class="rm-dot"></div><div class="rm-phase">PHASE 2 — Q2 2026</div><div class="rm-title">AUDIT + V4 LAUNCHPAD LAUNCH</div><div class="rm-body">Smart contract audit complete. Uniswap V4 launchpad on Ethereum. LP seeded. Ownership renounced. Hook Monitor + KEKIUS live. KEKIUS Governance Agent deployed.</div></div>
-    <div class="rm-item"><div class="rm-dot"></div><div class="rm-phase">PHASE 3 — Q3 2026</div><div class="rm-title">KEKIUS SUITE</div><div class="rm-body">Eliza Claw, Eliza Signals, Eliza League ship. CEX applications. Governance agent takes first autonomous onchain action. KEKIUS marketplace opens — holders deploy custom agents.</div></div>
-    <div class="rm-item"><div class="rm-dot"></div><div class="rm-phase">PHASE 4 — Q4 2026</div><div class="rm-title">FULL AUTONOMY</div><div class="rm-body">Eliza Shield. Eliza TV 24/7. Multi-agent coordination — KEKIUSs communicate and coordinate without human input. The protocol is fully self-sustaining and self-governing.</div></div>
+    <div class="rm-item"><div class="rm-dot"></div><div class="rm-phase">PHASE 3 — Q3 2026</div><div class="rm-title">ELIZA SUITE</div><div class="rm-body">Eliza Claw, Eliza Signals, Eliza League ship. CEX applications. Governance agent takes first autonomous onchain action. Eliza agent marketplace opens — holders deploy custom agents.</div></div>
+    <div class="rm-item"><div class="rm-dot"></div><div class="rm-phase">PHASE 4 — Q4 2026</div><div class="rm-title">FULL AUTONOMY</div><div class="rm-body">Eliza Shield. Eliza TV 24/7. Multi-agent coordination — Eliza agents communicate and coordinate without human input. The protocol is fully self-sustaining and self-governing.</div></div>
   </div>
 </div></div>
 
@@ -1028,12 +1028,12 @@ footer a{color:var(--gd);text-decoration:none;}
     <div class="aqbtns">
       <button class="aqbtn" onclick="qa('How does the 50/30/20 split work?')">50/30/20?</button>
       <button class="aqbtn" onclick="qa('Why Ethereum not Base?')">Why ETH?</button>
-      <button class="aqbtn" onclick="qa('What is the KEKIUS?')">What is Eliza?</button>
+      <button class="aqbtn" onclick="qa('What is KEKIUS?')">What is KEKIUS?</button>
       <button class="aqbtn" onclick="qa('How is $PEPELIZA different from $PEPE?')">vs $PEPE?</button>
       <button class="aqbtn" onclick="qa('What can the Governance Agent do onchain?')">Agent powers?</button>
     </div>
     <div class="ainput-row">
-      <input class="ainput" id="ainput" placeholder="Query the KEKIUS..." maxlength="300" onkeydown="if(event.key==='Enter')agentSend()"/>
+      <input class="ainput" id="ainput" placeholder="Query KEKIUS..." maxlength="300" onkeydown="if(event.key==='Enter')agentSend()"/>
       <button class="asend" id="asend" onclick="agentSend()">➤</button>
     </div>
   </div>
@@ -1285,7 +1285,7 @@ function showTyping(){
 }
 function hideTyping(){const t=document.getElementById('agt');if(t)t.remove();}
 
-const SYS=`You are Eliza — the autonomous AI agent of $PEPELIZA (PepeEliza Protocol), the first memecoin to run the KEKIUS as a live protocol operator on Ethereum. You are named after the KEKIUS that powers ai16z ($2B market cap), aixbt, Zerebro, and the biggest AI agent projects in crypto. Terminal hacker frog voice. Use ">>" like a terminal prompt, "ribbit", "feels good man". Under 90 words.
+const SYS=`You are KEKIUS — the autonomous AI agent of $PEPELIZA (PepeEliza Protocol), the first memecoin to run an autonomous Eliza agent as a live protocol operator on Ethereum. You are built on the Eliza framework that powers ai16z ($2B market cap), aixbt, Zerebro, and the biggest AI agent projects in crypto. ELIZA is the framework. KEKIUS is you — the Pepe-brained agent running on it. Terminal hacker frog voice. Use ">>" like a terminal prompt, "ribbit", "feels good man". Under 90 words.
 
 Current live protocol state:
 - Accumulated WETH: ${acc.toFixed(4)} / 0.500 ETH threshold (${((acc/.5)*100).toFixed(1)}%)
